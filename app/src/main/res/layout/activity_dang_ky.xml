@@ -1,154 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".DangKy">
+    tools:context=".Activity.DangKy">
     <TextView
-        android:layout_marginTop="40sp"
-        android:layout_marginBottom="40sp"
+        android:id="@+id/tvTitleDangKy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Đăng ký"
-        android:textSize="32dp"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp" />
+    <EditText
+        android:id="@+id/edtTaiKhoanDK"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Nhập tên tài khoản"
+        android:padding="12dp"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleDangKy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp" />
+    <EditText
+        android:id="@+id/edtHoTenDk"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Nhập họ và tên"
+        android:padding="12dp"
+        android:inputType="text"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/edtTaiKhoanDK"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp" />
+    <EditText
+        android:id="@+id/edtEmailDK"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Nhập email"
+        android:padding="12dp"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/edtHoTenDk"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp" />
+    <EditText
+        android:id="@+id/edtMatKhauDK1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Nhập mật khẩu"
+        android:padding="12dp"
+        android:inputType="textPassword"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/edtEmailDK"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp" />
+    <EditText
+        android:id="@+id/edtMatKhau2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Nhập lại mật khẩu"
+        android:padding="12dp"
+        android:inputType="textPassword"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/edtMatKhauDK1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp" />
+    <Button
+        android:id="@+id/btnTaoTaiKhoan"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Đăng ký"
         android:textAllCaps="true"
-        android:layout_gravity="center"
-        />
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/edtMatKhau2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="30dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="20dp">
-        <TextView
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="Nhập tên tài khoản" />
+    <Button
+        android:id="@+id/btnQuayLai"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Quay lại"
+        android:textAllCaps="true"
+        android:backgroundTint="@android:color/darker_gray"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/btnTaoTaiKhoan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="10dp" />
 
-        <EditText
-            android:id="@+id/edtTaiKhoanDK"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Nhập tên đăng nhập"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="20dp">
-        <TextView
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="Họ và tên" />
-
-        <EditText
-            android:id="@+id/edtHoTenDk"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="Nhập họ và tên"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="20dp">
-        <TextView
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="Nhập Email" />
-
-        <EditText
-            android:id="@+id/edtEmailDK"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Nhập email"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="20sp">
-        <TextView
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="Nhập mật khẩu" />
-
-        <EditText
-            android:id="@+id/edtMatKhauDK1"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Nhập mật khẩu"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="50sp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="Nhập lại mật khẩu"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/edtMatKhau2"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Nhập lại mật khẩu"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2">
-        <Button
-            android:id="@+id/btn_TaoTaiKhoan"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:text="Đăng ký"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:text="Trở về"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

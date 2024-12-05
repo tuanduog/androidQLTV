@@ -1,17 +1,20 @@
-package com.example.nhom14didong.DTO;
+package com.example.nhom14didong.Model;
 
-public class PhieuMuonDTO {
-    private int phieuMuonID;
-    private int userID;
-    private int taiLieuID;
-    private String ngayMuon;
-    private String ngayHenTra;
-    private String ngayTra;
-    private String tinhTrang;
-    private String ghiChu;
-    private String ngayTao;
+public class PhieuMuon {
+    public int phieuMuonID;
+    public int userID;
+    public int taiLieuID;
+    public String ngayMuon;
+    public String ngayHenTra;
+    public String ngayTra;
+    public String tinhTrang;
+    public String ghiChu;
+    public String ngayTao;
 
-    public PhieuMuonDTO(int phieuMuonID, int userID, int taiLieuID, String ngayMuon, String ngayHenTra, String ngayTra, String tinhTrang, String ghiChu, String ngayTao) {
+    public PhieuMuon() {
+    }
+
+    public PhieuMuon(int phieuMuonID, int userID, int taiLieuID, String ngayMuon, String ngayHenTra, String ngayTra, String tinhTrang, String ghiChu, String ngayTao) {
         this.phieuMuonID = phieuMuonID;
         this.userID = userID;
         this.taiLieuID = taiLieuID;
@@ -21,9 +24,6 @@ public class PhieuMuonDTO {
         this.tinhTrang = tinhTrang;
         this.ghiChu = ghiChu;
         this.ngayTao = ngayTao;
-    }
-
-    public PhieuMuonDTO() {
     }
 
     public int getPhieuMuonID() {

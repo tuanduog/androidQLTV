@@ -1,18 +1,21 @@
-package com.example.nhom14didong.DTO;
+package com.example.nhom14didong.Model;
 
-public class TaiLieuDTO {
-    private int taiLieuID;
-    private String tenTaiLieu;
-    private String image;
-    private String tacGia;
-    private String theLoai;
-    private String ngayXuatBan;
-    private String moTa;
-    private int soLuong;
-    private String trangThai;
-    private String ngayTao;
+public class TaiLieu {
+    public int taiLieuID;
+    public String tenTaiLieu;
+    public String image;
+    public String tacGia;
+    public String theLoai;
+    public String ngayXuatBan;
+    public String moTa;
+    public int soLuong;
+    public String tinhTrang;
+    public String ngayTao;
 
-    public TaiLieuDTO(int taiLieuID, String tenTaiLieu, String image, String tacGia, String theLoai, String ngayXuatBan, String moTa, int soLuong, String trangThai, String ngayTao) {
+    public TaiLieu() {
+    }
+
+    public TaiLieu(int taiLieuID, String tenTaiLieu, String image, String tacGia, String theLoai, String ngayXuatBan, String moTa, int soLuong, String tinhTrang, String ngayTao) {
         this.taiLieuID = taiLieuID;
         this.tenTaiLieu = tenTaiLieu;
         this.image = image;
@@ -21,11 +24,8 @@ public class TaiLieuDTO {
         this.ngayXuatBan = ngayXuatBan;
         this.moTa = moTa;
         this.soLuong = soLuong;
-        this.trangThai = trangThai;
+        this.tinhTrang = tinhTrang;
         this.ngayTao = ngayTao;
-    }
-
-    public TaiLieuDTO() {
     }
 
     public int getTaiLieuID() {
@@ -92,12 +92,12 @@ public class TaiLieuDTO {
         this.soLuong = soLuong;
     }
 
-    public String getTrangThai() {
-        return trangThai;
+    public String getTinhTrang() {
+        return tinhTrang;
     }
 
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
+    public void setTinhTrang(String tinhTrang) {
+        this.tinhTrang = tinhTrang;
     }
 
     public String getNgayTao() {
