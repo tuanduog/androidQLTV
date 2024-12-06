@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import android.util.Log;
 
 public class DangKy extends AppCompatActivity {
     String DB_PATH_SUFFIX = "/databases/";
@@ -28,7 +29,6 @@ public class DangKy extends AppCompatActivity {
     String DATABASE_NAME="QLThuVien1.db";
     private EditText edtUsername, edtPassword;
     private Button btnDangKy;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,39 +47,41 @@ public class DangKy extends AppCompatActivity {
 
     }
     private void DangKyTaiKhoan() {
+        Log.d("DangKy", "Starting registration process.");
         String username = edtUsername.getText().toString().trim();
         String password = edtPassword.getText().toString().trim();
 
-        // Kiểm tra rỗng
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            Log.d("DangKy", "Input fields are empty.");
             return;
         }
 
-        // Kiểm tra tài khoản đã tồn tại
         Cursor cursor = database.rawQuery("SELECT * FROM NGUOIDUNG WHERE USERNAME = ?", new String[]{username});
-        if (cursor.getCount() > 0) {
+        if (cursor != null && cursor.moveToFirst()) {
             Toast.makeText(this, "Tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
+            Log.d("DangKy", "User already exists.");
             cursor.close();
             return;
         }
         cursor.close();
 
-        // Thêm tài khoản vào cơ sở dữ liệu
         try {
-            String query = "INSERT INTO NguoiDung (UserName,UserPass) VALUES ('" + username + "', '" + password + "')";
-            database.execSQL(query);
+            database.execSQL("INSERT INTO NGUOIDUNG (USERNAME, USERPASS) VALUES (?, ?)", new Object[]{username, password});
             Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
 
-            // Xóa nội dung nhập sau khi đăng ký thành công
             edtUsername.setText("");
             edtPassword.setText("");
-
+            Log.d("DangKy", "Registration successful.");
+            Log.d("DangKy", "Database copied to: " + getDatabasePath());
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Lỗi khi đăng ký: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("DangKy", "Error during registration: " + e.getMessage());
         }
     }
+
+
 
     private void processCopy() {
         File dbFile = getDatabasePath(DATABASE_NAME);
