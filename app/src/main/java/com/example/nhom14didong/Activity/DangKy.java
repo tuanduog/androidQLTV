@@ -1,5 +1,6 @@
 package com.example.nhom14didong.Activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class DangKy extends AppCompatActivity {
     String DATABASE_NAME="QLThuVien1.db";
     private EditText edtUsername, edtPassword;
     private Button btnDangKy;
+    private Button btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +40,19 @@ public class DangKy extends AppCompatActivity {
         edtUsername = findViewById(R.id.edtTaiKhoanDK);
         edtPassword = findViewById(R.id.edtMatKhauDK1);
         btnDangKy = findViewById(R.id.btnTaoTaiKhoan);
+        btnBack = findViewById(R.id.btnQuayLai);
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DangKyTaiKhoan();
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DangKy.this, DangNhap.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -74,6 +85,10 @@ public class DangKy extends AppCompatActivity {
             edtPassword.setText("");
             Log.d("DangKy", "Registration successful.");
             Log.d("DangKy", "Database copied to: " + getDatabasePath());
+
+            Intent intent = new Intent(DangKy.this, DangNhap.class);
+            startActivity(intent);
+            finish();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Lỗi khi đăng ký: " + e.getMessage(), Toast.LENGTH_LONG).show();

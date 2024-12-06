@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quản lý thư viện"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Image -->
+    <ImageView
+        android:id="@+id/img_library"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:src="@drawable/tv"
+
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="25dp" />
+
+    <!-- Buttons Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <!-- Row 1 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:background="@drawable/border"
+                android:layout_marginRight="20dp">
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/book_img"
+                    android:background="@android:color/transparent"
+                    android:layout_marginStart="40dp"/>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Danh sách tài liệu"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginStart="35dp"
+                    android:textAlignment="center"
+                    />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:background="@drawable/border"
+                >
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/list"
+                    android:layout_marginTop="7px"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
+                    android:layout_marginStart="40dp"/>
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="Danh sách phiếu mượn"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginStart="35dp"
+                    android:textAlignment="center"
+                    />
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Row 2 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="25dp">
+
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:background="@drawable/border"
+                android:layout_marginRight="20dp">
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="7px"
+                    android:layout_marginStart="40dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/like" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Danh sách yêu thích"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginStart="35dp"
+                    android:textAlignment="center"
+                    />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:background="@drawable/border"
+                >
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/search_img"
+                    android:background="@android:color/transparent"
+                    android:layout_marginStart="40dp"/>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tìm kiếm tài liệu"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginStart="35dp"
+                    android:textAlignment="center"
+                    />
+
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/black" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        >
+
+        <ImageButton
+            android:id="@+id/btnSearch"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/home"/>
+        <ImageButton
+
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitCenter"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/book_img"/>
+        <ImageButton
+
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="fitCenter"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/search_img"/>
+        <ImageButton
+
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:scaleType="fitCenter"
+            android:layout_marginStart="9dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/cart"/>
+        <ImageButton
+
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitCenter"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/user"/>
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
