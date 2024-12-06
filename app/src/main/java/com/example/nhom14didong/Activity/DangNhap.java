@@ -64,8 +64,6 @@ public class DangNhap extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
-
-
         try {
             Cursor cursor = db.rawQuery(
                     "SELECT * FROM NGUOIDUNG WHERE USERNAME = ? AND USERPASS = ?",
@@ -76,9 +74,9 @@ public class DangNhap extends AppCompatActivity {
                 String userName = cursor.getString(cursor.getColumnIndexOrThrow("USERNAME"));
                 Toast.makeText(this, "Đăng nhập thành công: " + userName, Toast.LENGTH_SHORT).show();
                 cursor.close();
-                // Chuyển sang màn hình HomeActivity
-                // Intent intent = new Intent(DangNhap.this, HomeActivity.class);
-                // startActivity(intent);
+                 // Chuyển sang màn hình HomeActivity
+                 Intent intent = new Intent(DangNhap.this, HomePage.class);
+                 startActivity(intent);
             } else {
                 Toast.makeText(this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
             }
