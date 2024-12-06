@@ -22,6 +22,12 @@
             android:name=".Activity.HomePage"
             android:exported="true" />
         <activity
+            android:name=".Activity.Admin_Homepage"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.QuanLyTaiLieu"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
