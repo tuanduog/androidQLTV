@@ -11,10 +11,10 @@
       <SelectionState runConfigName="DangNhap">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="HomePage">
+      <SelectionState runConfigName="dsphieumuon">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="Admin_Homepage">
+      <SelectionState runConfigName="DsPhieuMuonActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
