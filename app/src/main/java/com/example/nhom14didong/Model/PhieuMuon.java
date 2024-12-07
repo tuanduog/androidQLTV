@@ -25,7 +25,6 @@ public class PhieuMuon {
         this.ghiChu = ghiChu;
         this.ngayTao = ngayTao;
     }
-
     public int getPhieuMuonID() {
         return phieuMuonID;
     }

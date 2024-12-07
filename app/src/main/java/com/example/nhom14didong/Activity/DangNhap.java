@@ -10,17 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.nhom14didong.Database.Database;
 import com.example.nhom14didong.R;
 
 public class DangNhap extends AppCompatActivity {
-    final String DATABASE_NAME = "QLThuVien1.db";
+    final String DATABASE_NAME = "mydatabase.db";
     private EditText edtTaiKhoan, edtMatKhau;
     private SQLiteDatabase db;
     private Button dangnhap, dangky;

@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="tab_pressed">#AAAAAA</color>
+    <color name="tab_selected">#888888</color>
+    <color name="tab_default">#DDDDDD</color>
 </resources>
