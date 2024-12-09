@@ -16,7 +16,7 @@
             android:text="ID"
             android:textSize="24dp"
             android:textStyle="bold"
-            android:id="@+id/tvIDPT"/>
+            android:id="@+id/txtIDPT"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -24,7 +24,19 @@
             android:text="Tên sách"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:id="@+id/tvTenSachPT"/>
+            android:id="@+id/txtTenSachPT"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Người mượn: "
+            android:textSize="18dp"
+            android:id="@+id/txtNguoiMuonPT"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,6 +58,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="Ngày hẹn trả: "
+            android:textSize="18dp"
+            android:id="@+id/txtNgayHenTraPT"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Ngày trả: "
             android:textSize="18dp"
             android:id="@+id/txtNgayTraPT"/>
@@ -56,12 +80,6 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
 
-        <Button
-            android:id="@+id/btnXemChiTietPT"
-            android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:text="Xem chi tiết"
-            android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/btnXoaPT"

@@ -5,4 +5,7 @@
     <color name="tab_pressed">#AAAAAA</color>
     <color name="tab_selected">#888888</color>
     <color name="tab_default">#DDDDDD</color>
+    <color name="blue">#2196F3</color> <!-- Màu xanh dương khi chọn -->
+    <color name="gray">#BDBDBD</color> <!-- Màu xám mặc định -->
+
 </resources>

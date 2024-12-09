@@ -33,24 +33,38 @@ public class dsphieumuon extends AppCompatActivity {
         setContentView(R.layout.activity_dsphieumuon);
         list = new ArrayList<>();
         database = Database.initDatabase(this, DATABASE_NAME);
-        adapter = new PhieuMuonAdapter(this, list, database);
+        adapter = new PhieuMuonAdapter(this, list, database, tinhTrang);
         anhXa();
         listView.setAdapter(adapter);
-
-        tinhTrang="Đã hủy"; //Mac dinh
+        //Mặc định la chua xac nhan
+        btnChuaXacNhanPM.setBackgroundResource(R.drawable.button_selected);
+        btnChuaXacNhanPM.setTextColor(getResources().getColor(R.color.white));
+        btnDaXacNhanPM.setBackgroundResource(R.drawable.button_default); // Nền mặc định
+        btnDaXacNhanPM.setTextColor(getResources().getColor(R.color.black));
+        tinhTrang="Chưa xác nhận"; //Mac dinh
         readData(tinhTrang);
         btnChuaXacNhanPM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tinhTrang = "Chưa xác nhận";
+                adapter.setTinhTrang(tinhTrang);
                 readData(tinhTrang);
+                btnChuaXacNhanPM.setBackgroundResource(R.drawable.button_selected);
+                btnChuaXacNhanPM.setTextColor(getResources().getColor(R.color.white));
+                btnDaXacNhanPM.setBackgroundResource(R.drawable.button_default); // Nền mặc định
+                btnDaXacNhanPM.setTextColor(getResources().getColor(R.color.black));
             }
         });
         btnDaXacNhanPM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tinhTrang = "Đã xác nhận";
+                adapter.setTinhTrang(tinhTrang);
                 readData(tinhTrang);
+                btnDaXacNhanPM.setBackgroundResource(R.drawable.button_selected);
+                btnDaXacNhanPM.setTextColor(getResources().getColor(R.color.white));
+                btnChuaXacNhanPM.setBackgroundResource(R.drawable.button_default);
+                btnChuaXacNhanPM.setTextColor(getResources().getColor(R.color.black));
             }
         });
     }
@@ -61,6 +75,7 @@ public class dsphieumuon extends AppCompatActivity {
                         " NGAYHENTRA, NGAYTRA, TINHTRANG," +
                         "GHICHU, NGAYTAO FROM PHIEUMUON " +
                 "WHERE TINHTRANG=?", new String[]{tinhTrang});
+        //Khi nào có user id thi them where id
         list.clear();
         while (cursor.moveToNext()) {
             int phieuMuonID = cursor.getInt(0);

@@ -8,7 +8,7 @@
 
     <!-- Hình ảnh -->
     <ImageView
-        android:id="@+id/imgThumbnail"
+        android:id="@+id/imgSachMuonDXN"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="8dp"
@@ -23,7 +23,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtTenSachDaXacNhanPM"
+            android:id="@+id/txtTenSachDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tên sách"
@@ -32,7 +32,7 @@
             android:paddingBottom="14dp"
             android:layout_gravity="center"/>
         <TextView
-            android:id="@+id/txtTheLoaiDaXacNhanPM"
+            android:id="@+id/txtTheLoaiDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thể loại"
@@ -40,21 +40,23 @@
             android:paddingBottom="20dp"
             android:layout_gravity="center"/>
         <TextView
-            android:id="@+id/txtNguoiMuon"
+            android:id="@+id/txtNguoiMuonDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
             android:text="Người mượn:"
             android:textSize="18sp" />
+
         <TextView
-            android:id="@+id/txtThoiGianMuon"
+            android:id="@+id/txtThoiGianMuonDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
             android:text="Thời gian mượn:"
             android:textSize="18sp" />
+
         <TextView
-            android:id="@+id/txtThoiGianTra"
+            android:id="@+id/txtThoiGianTraDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thời gian trả:"

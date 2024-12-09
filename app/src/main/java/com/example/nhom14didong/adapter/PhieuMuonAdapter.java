@@ -26,13 +26,18 @@ public class PhieuMuonAdapter extends BaseAdapter {
     private Activity context;
     private ArrayList<PhieuMuon> mylist;
     private SQLiteDatabase database;
+    private String tinhTrang;
 
-    public PhieuMuonAdapter(Activity context, ArrayList<PhieuMuon> mylist, SQLiteDatabase database) {
+    public PhieuMuonAdapter(Activity context, ArrayList<PhieuMuon> mylist, SQLiteDatabase database, String tinhTrang) {
         this.context = context;
         this.mylist = mylist;
         this.database = database;
+        this.tinhTrang = tinhTrang != null ? tinhTrang : "Chưa xác nhận";
     }
-
+    public void setTinhTrang(String tinhTrang) {
+        this.tinhTrang = tinhTrang;
+        notifyDataSetChanged();
+    }
     @Override
     public int getCount() {
         return mylist.size();
@@ -47,40 +52,90 @@ public class PhieuMuonAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+    @Override
+    public int getItemViewType(int position) {
+        if (tinhTrang != null) {
+            if (tinhTrang.equals("Chưa xác nhận")) {
+                return 0;
+            } else if (tinhTrang.equals("Đã xác nhận")) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+    public int getViewTypeCount() {
+        return 2;
+    }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        int viewType = getItemViewType(position);
+        PhieuMuon pm = mylist.get(position);
         if (convertView == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            convertView = inflater.inflate(R.layout.layout_item_chuaxacnhan_pm, null);
-        }
-        PhieuMuon pm = mylist.get(position);
-        ImageView imgSachMuon = convertView.findViewById(R.id.imgSachMuon);
-        TextView txtTenSach = convertView.findViewById(R.id.txtTenSachChuaXacNhan);
-        TextView txtTheLoai = convertView.findViewById(R.id.txtTheLoaiChuaXacNhan);
-        TextView txtNguoiMuon = convertView.findViewById(R.id.txtNguoiMuonChuaXacNhan);
-        TextView txtThoiGianMuon = convertView.findViewById(R.id.txtThoiGianMuonCXN);
-        TextView txtThoiGianTra = convertView.findViewById(R.id.txtThoiGianTraCXN);
-        Button btnDongY = convertView.findViewById(R.id.btnDongY);
-        Button btnHuy = convertView.findViewById(R.id.btnHuy);
-        Cursor cursor = database.rawQuery("SELECT TAILIEU.TENTAILIEU, TAILIEU.THELOAI, TAILIEU.IMAGE, NGUOIDUNG.FULLNAME," +
-                " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
-                "INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID WHERE PHIEUMUON.PHIEUMUONID = ? ",new String[]{String.valueOf(pm.phieuMuonID)});
+            if (viewType == 0) {
+                // Layout cho "Chưa xác nhận"
+                convertView = inflater.inflate(R.layout.layout_item_chuaxacnhan_pm, parent, false);
+                ImageView imgSachMuon = convertView.findViewById(R.id.imgSachMuon);
+                TextView txtTenSach = convertView.findViewById(R.id.txtTenSachChuaXacNhan);
+                TextView txtTheLoai = convertView.findViewById(R.id.txtTheLoaiChuaXacNhan);
+                TextView txtNguoiMuon = convertView.findViewById(R.id.txtNguoiMuonChuaXacNhan);
+                TextView txtThoiGianMuon = convertView.findViewById(R.id.txtThoiGianMuonCXN);
+                TextView txtThoiGianTra = convertView.findViewById(R.id.txtThoiGianTraCXN);
+                Button btnDongY = convertView.findViewById(R.id.btnDongY);
+                Button btnHuy = convertView.findViewById(R.id.btnHuy);
+                Cursor cursor = database.rawQuery("SELECT TAILIEU.TENTAILIEU, TAILIEU.THELOAI, TAILIEU.IMAGE, NGUOIDUNG.FULLNAME," +
+                        " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
+                        "INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID WHERE PHIEUMUON.PHIEUMUONID = ? ",new String[]{String.valueOf(pm.phieuMuonID)});
 
-        if (cursor.moveToFirst()) {
-            String tenSach = cursor.getString(0);
-            String theLoai = cursor.getString(1);
-            byte[] imageBytes = cursor.getBlob(2);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            imgSachMuon.setImageBitmap(bitmap);
-            txtTenSach.setText(tenSach);
-            txtTheLoai.setText(theLoai);
-            txtNguoiMuon.setText("Người muượn: "+cursor.getString(3));
-            txtThoiGianMuon.setText("Ngày muợn mượn: "+cursor.getString(4));
-            txtThoiGianTra.setText("Ngày hẹn trả: "+cursor.getString(5));
-        }
-        if (cursor!=null) {
-            cursor.close();
+                if (cursor.moveToFirst()) {
+                    String tenSach = cursor.getString(0);
+                    String theLoai = cursor.getString(1);
+                    byte[] imageBytes = cursor.getBlob(2);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                    imgSachMuon.setImageBitmap(bitmap);
+                    txtTenSach.setText(tenSach);
+                    txtTheLoai.setText(theLoai);
+                    txtNguoiMuon.setText("Người muượn: "+cursor.getString(3));
+                    txtThoiGianMuon.setText("Ngày muợn mượn: "+cursor.getString(4));
+                    txtThoiGianTra.setText("Ngày hẹn trả: "+cursor.getString(5));
+                }
+                if (cursor!=null) {
+                    cursor.close();
+                }
+                return convertView;
+            } else {
+                // Layout cho "Đã xác nhận"
+                convertView = inflater.inflate(R.layout.layout_item_daxacnhan_pm, parent, false);
+                ImageView imgSachMuon = convertView.findViewById(R.id.imgSachMuonDXN);
+                TextView txtTenSach = convertView.findViewById(R.id.txtTenSachDXN);
+                TextView txtTheLoai = convertView.findViewById(R.id.txtTheLoaiDXN);
+                TextView txtNguoiMuon = convertView.findViewById(R.id.txtNguoiMuonDXN);
+                TextView txtThoiGianMuon = convertView.findViewById(R.id.txtThoiGianMuonDXN);
+                TextView txtThoiGianTra = convertView.findViewById(R.id.txtThoiGianMuonDXN);
+                Cursor cursor= database.rawQuery(
+                        "SELECT TAILIEU.TENTAILIEU, TAILIEU.THELOAI, TAILIEU.IMAGE, NGUOIDUNG.FULLNAME, " +
+                                " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
+                                "INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID WHERE PHIEUMUON.PHIEUMUONID = ? ",new String[]{String.valueOf(pm.phieuMuonID)});
+                if (cursor.moveToFirst()) {
+                    String tenSach = cursor.getString(0);
+                    String theLoai = cursor.getString(1);
+                    byte[] imageBytes = cursor.getBlob(2);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                    imgSachMuon.setImageBitmap(bitmap);
+                    txtTenSach.setText(tenSach);
+                    txtTheLoai.setText(theLoai);
+                    txtNguoiMuon.setText("Người muượn: "+cursor.getString(3));
+                    txtThoiGianMuon.setText("Ngày muợn mượn: "+cursor.getString(4));
+                    txtThoiGianTra.setText("Ngày hẹn trả: "+cursor.getString(5));
+                }
+                if (cursor!=null) {
+                    cursor.close();
+                }
+                return convertView;
+
+            }
         }
         return convertView;
     }
