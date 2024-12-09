@@ -101,6 +101,42 @@ public class PhieuMuonAdapter extends BaseAdapter {
                     txtThoiGianMuon.setText("Ngày muợn mượn: "+cursor.getString(4));
                     txtThoiGianTra.setText("Ngày hẹn trả: "+cursor.getString(5));
                 }
+                btnDongY.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Bạn có chắc chắn muốn xác nhận phiếu mượn này không?")
+                                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String updateQuery = "UPDATE PHIEUMUON SET TINHTRANG = 'Đã xác nhận' WHERE PHIEUMUONID = ?";
+                                        database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
+                                        Toast.makeText(context, "Phiếu mượn đã được xác nhận", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton("Không", null);
+                        builder.create().show();
+                    }
+                });
+                btnHuy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Bạn có chắc chắn muốn hủy phiếu mượn này không?")
+                                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String updateQuery = "UPDATE PHIEUMUON SET TINHTRANG = 'Hủy' WHERE PHIEUMUONID = ?";
+                                        database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
+                                        Toast.makeText(context, "Phiếu mượn đã bị hủy", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton("Không", null);
+                        builder.create().show();
+                    }
+                });
                 if (cursor!=null) {
                     cursor.close();
                 }

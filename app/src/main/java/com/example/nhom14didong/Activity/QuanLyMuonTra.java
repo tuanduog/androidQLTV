@@ -55,6 +55,7 @@ public class QuanLyMuonTra extends AppCompatActivity {
         btnPhieuMuon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ngayTra=null;
                 adapter.setNgayTra(ngayTra);
                 readData(tinhTrang);
                 btnPhieuMuon.setBackgroundResource(R.drawable.button_selected);

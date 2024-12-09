@@ -1,0 +1,32 @@
+<!-- dialog_sua_phieumuon.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <!-- Người mượn -->
+
+    <!-- Ngày mượn -->
+    <TextView
+        android:id="@+id/edtNgayMuon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày mượn"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Chọn ngày mượn" />
+
+    <!-- Ngày hẹn trả -->
+    <TextView
+        android:id="@+id/edtNgayHenTra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày hẹn trả"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Chọn ngày hẹn trả" />
+</LinearLayout>

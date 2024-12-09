@@ -1,7 +1,10 @@
 package com.example.nhom14didong.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -11,13 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class QLPhieuMuonTraAdapter extends BaseAdapter {
     private Activity context;
@@ -61,7 +68,22 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
         return 2;
     }
 
+    private void showDatePickerDialog(final TextView targetView) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                targetView.setText(selectedDate);
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         int viewType = getItemViewType(position);
@@ -98,6 +120,92 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                     txtNgayMuon.setText(ngayMuon);
                     txtNgayHenTra.setText(ngayHenTra);
                 }
+                //NUT XOA
+                btnXoa.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Bạn có chắc muốn xóa phiếu mượn này không?")
+                                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String updateQuery = "UPDATE PHIEUMUON SET TINHTRANG = 'Đã xóa' WHERE PHIEUMUONID = ?";
+                                        database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
+                                        Toast.makeText(context, "Phiếu mượn đã bị xóa", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton("Không", null);
+                        builder.create().show();
+                    }
+                });
+                //NUT XAC NHAN TRA
+                btnXacNhanTra.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Bạn có chắc muốn xác nhận trả không?")
+                                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String updateQuery = "UPDATE PHIEUMUON SET NGAYTRA = CURRENT_TIMESTAMP WHERE PHIEUMUONID = ?";
+                                        database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
+                                        Toast.makeText(context, "Xác nhận trả thành công", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton("Không", null);
+                        builder.create().show();
+                    }
+                });
+                //NUT SUA
+                btnSua.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LayoutInflater inflater = context.getLayoutInflater();
+                        View dialogView = inflater.inflate(R.layout.dialog_sua_phieumuon, null);
+                        TextView edtNgayMuon = dialogView.findViewById(R.id.edtNgayMuon);
+                        TextView edtNgayHenTra = dialogView.findViewById(R.id.edtNgayHenTra);
+                        // DO DU LIEU LEN
+                        edtNgayMuon.setText(txtNgayMuon.getText().toString());
+                        edtNgayHenTra.setText(txtNgayHenTra.getText().toString());
+                        edtNgayMuon.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                showDatePickerDialog(edtNgayMuon);
+                            }
+                        });
+                        edtNgayHenTra.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                showDatePickerDialog(edtNgayHenTra);
+                            }
+                        });
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setView(dialogView)
+                                .setTitle("Sửa phiếu mượn")
+                                .setPositiveButton("Lưu", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Lấy dữ liệu người dùng sửa
+                                        String ngayMuonMoi = edtNgayMuon.getText().toString();
+                                        String ngayHenTraMoi = edtNgayHenTra.getText().toString();
+
+                                        // Cập nhật cơ sở dữ liệu
+                                        String updateQuery = "UPDATE PHIEUMUON SET , NGAYMUON = ?, NGAYHENTRA = ? WHERE PHIEUMUONID = ?";
+                                        database.execSQL(updateQuery, new Object[]{ ngayMuonMoi, ngayHenTraMoi, pm.phieuMuonID});
+                                        txtNgayMuon.setText(ngayMuonMoi);
+                                        txtNgayHenTra.setText(ngayHenTraMoi);
+
+                                        Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton("Hủy", null);
+
+                        builder.create().show();
+                    }
+                });
                 if (cursor!=null) {
                     cursor.close();
                 }
@@ -131,10 +239,30 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                     txtNgayHenTra.setText(ngayHenTra);
                     txtNgayTra.setText(ngayTra);
                 }
+                btnXoa.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Bạn có chắc muốn xóa phiếu mượn này không?")
+                                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String updateQuery = "UPDATE PHIEUMUON SET TINHTRANG = 'Đã xóa' WHERE PHIEUMUONID = ?";
+                                        database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
+                                        Toast.makeText(context, "Phiếu mượn đã bị xóa", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton("Không", null);
+                        builder.create().show();
+                    }
+                });
+
                 if (cursor!=null) {
                     cursor.close();
                 }
                 return convertView;
+
 
             }
         }
