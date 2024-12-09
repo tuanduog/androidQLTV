@@ -1,6 +1,8 @@
 package com.example.nhom14didong.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -12,7 +14,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.nhom14didong.Activity.dsphieumuon;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
 
@@ -47,54 +51,38 @@ public class PhieuMuonAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            // Sử dụng layout cụ thể trong mã (không cần truyền idLayout)
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.layout_item_chuaxacnhan_pm, null);
         }
-
-        // Ánh xạ các view
+        PhieuMuon pm = mylist.get(position);
         ImageView imgSachMuon = convertView.findViewById(R.id.imgSachMuon);
         TextView txtTenSach = convertView.findViewById(R.id.txtTenSachChuaXacNhan);
         TextView txtTheLoai = convertView.findViewById(R.id.txtTheLoaiChuaXacNhan);
+        TextView txtNguoiMuon = convertView.findViewById(R.id.txtNguoiMuonChuaXacNhan);
+        TextView txtThoiGianMuon = convertView.findViewById(R.id.txtThoiGianMuonCXN);
+        TextView txtThoiGianTra = convertView.findViewById(R.id.txtThoiGianTraCXN);
         Button btnDongY = convertView.findViewById(R.id.btnDongY);
         Button btnHuy = convertView.findViewById(R.id.btnHuy);
+        Cursor cursor = database.rawQuery("SELECT TAILIEU.TENTAILIEU, TAILIEU.THELOAI, TAILIEU.IMAGE, NGUOIDUNG.FULLNAME," +
+                " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
+                "INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID WHERE PHIEUMUON.PHIEUMUONID = ? ",new String[]{String.valueOf(pm.phieuMuonID)});
 
-        // Lấy dữ liệu phiếu mượn
-        PhieuMuon pm = mylist.get(position);
-
-        // Truy vấn dữ liệu từ bảng tài liệu
-        Cursor cursor = database.rawQuery(
-                "SELECT TENTAILIEU, THELOAI, IMAGE FROM TAILIEU WHERE TAILIEUID = ?",
-                new String[]{String.valueOf(pm.taiLieuID)}
-        );
-
-        if (cursor != null && cursor.moveToFirst()) {
-            // Lấy dữ liệu từ cursor
+        if (cursor.moveToFirst()) {
             String tenSach = cursor.getString(0);
             String theLoai = cursor.getString(1);
-            byte[] hinhAnh = cursor.getBlob(2);
-
-            // Gán dữ liệu vào view
+            byte[] imageBytes = cursor.getBlob(2);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            imgSachMuon.setImageBitmap(bitmap);
             txtTenSach.setText(tenSach);
             txtTheLoai.setText(theLoai);
-
-            // Hiển thị hình ảnh (nếu có)
-            if (hinhAnh != null) {
-                Bitmap bmSach = BitmapFactory.decodeByteArray(hinhAnh, 0, hinhAnh.length);
-                imgSachMuon.setImageBitmap(bmSach);
-            } else {
-                imgSachMuon.setImageResource(R.drawable.ic_launcher_background); // Hình mặc định
-            }
-        } else {
-            // Xử lý khi không có dữ liệu
-            txtTenSach.setText("Không tìm thấy tài liệu");
-            txtTheLoai.setText("N/A");
-            imgSachMuon.setImageResource(R.drawable.ic_launcher_background); // Hình mặc định
+            txtNguoiMuon.setText("Người muượn: "+cursor.getString(3));
+            txtThoiGianMuon.setText("Ngày muợn mượn: "+cursor.getString(4));
+            txtThoiGianTra.setText("Ngày hẹn trả: "+cursor.getString(5));
         }
-
-        // Đóng cursor
-        if (cursor != null) cursor.close();
-
+        if (cursor!=null) {
+            cursor.close();
+        }
         return convertView;
     }
+
 }
