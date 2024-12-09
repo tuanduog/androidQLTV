@@ -10,17 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.nhom14didong.Database.Database;
 import com.example.nhom14didong.R;
 
 public class DangNhap extends AppCompatActivity {
-    final String DATABASE_NAME = "QLThuVien1.db";
+    final String DATABASE_NAME = "mydatabase.db";
     private EditText edtTaiKhoan, edtMatKhau;
     private SQLiteDatabase db;
     private Button dangnhap, dangky;
@@ -64,8 +60,6 @@ public class DangNhap extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
-
-
         try {
             Cursor cursor = db.rawQuery(
                     "SELECT * FROM NGUOIDUNG WHERE USERNAME = ? AND USERPASS = ?",
@@ -76,9 +70,9 @@ public class DangNhap extends AppCompatActivity {
                 String userName = cursor.getString(cursor.getColumnIndexOrThrow("USERNAME"));
                 Toast.makeText(this, "Đăng nhập thành công: " + userName, Toast.LENGTH_SHORT).show();
                 cursor.close();
-                // Chuyển sang màn hình HomeActivity
-                // Intent intent = new Intent(DangNhap.this, HomeActivity.class);
-                // startActivity(intent);
+                 // Chuyển sang màn hình HomeActivity
+                 Intent intent = new Intent(DangNhap.this, HomePage.class);
+                 startActivity(intent);
             } else {
                 Toast.makeText(this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
             }

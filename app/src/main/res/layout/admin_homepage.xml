@@ -60,10 +60,11 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Danh sách tài liệu"
+                    android:text="Xem thống kê"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:layout_marginTop="55dp"
+                    android:textColor="@color/black"
                     android:layout_marginStart="35dp"
                     android:textAlignment="center"
                     />
@@ -71,11 +72,13 @@
             </FrameLayout>
 
             <FrameLayout
+
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:background="@drawable/border"
                 >
                 <ImageButton
+                    android:id="@+id/btnQLTaiLieu"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
                     android:src="@drawable/list"
@@ -86,11 +89,12 @@
                 <TextView
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:text="Danh sách phiếu mượn"
+                    android:text="Quản lý tài liệu"
                     android:textSize="16dp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginTop="55dp"
-                    android:layout_marginStart="35dp"
+                    android:layout_marginStart="30dp"
                     android:textAlignment="center"
                     />
 
@@ -118,14 +122,15 @@
                     android:layout_marginStart="40dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/like" />
+                    android:src="@drawable/user" />
 
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Danh sách yêu thích"
+                    android:text="Quản lý tài khoản"
                     android:textSize="16dp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginTop="55dp"
                     android:layout_marginStart="35dp"
                     android:textAlignment="center"
@@ -141,17 +146,19 @@
                 <ImageButton
                     android:layout_width="70dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/search_img"
+                    android:src="@drawable/list2"
+                    android:scaleType="fitCenter"
                     android:background="@android:color/transparent"
                     android:layout_marginStart="40dp"/>
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:text="Tìm kiếm tài liệu"
+                    android:text="Quản lý phiếu mượn"
                     android:textSize="16dp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginTop="55dp"
-                    android:layout_marginStart="35dp"
+                    android:layout_marginStart="30dp"
                     android:textAlignment="center"
                     />
 
@@ -163,47 +170,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="50dp"
-       >
-        <ImageButton
-            android:id="@+id/btnSearch"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:scaleType="fitCenter"
-            android:background="@android:color/transparent"
-            android:src="@drawable/home"/>
-        <ImageButton
+        android:layout_marginTop="90dp"
+        android:orientation="vertical">
 
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:scaleType="fitCenter"
-            android:layout_marginStart="10dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/book_img"/>
-        <ImageButton
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/black" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            >
 
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:scaleType="fitCenter"
-            android:layout_marginStart="10dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/search_img"/>
-        <ImageButton
+            <ImageButton
+                android:id="@+id/btnSearch"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:src="@drawable/home"/>
+            <ImageButton
 
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:scaleType="fitCenter"
-            android:layout_marginStart="9dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/cart"/>
-        <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/book_img"/>
+            <ImageButton
 
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:scaleType="fitCenter"
-            android:layout_marginStart="10dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/user"/>
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/search_img"/>
+            <ImageButton
+
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="9dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/cart"/>
+            <ImageButton
+
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/user"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

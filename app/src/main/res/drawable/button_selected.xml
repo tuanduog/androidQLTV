@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/blue" /> <!-- Màu nền khi được chọn -->
+    <corners android:radius="8dp" /> <!-- Góc bo -->
+</shape>

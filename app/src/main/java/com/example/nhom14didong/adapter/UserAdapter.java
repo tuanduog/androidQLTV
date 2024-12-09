@@ -13,15 +13,15 @@ import java.util.ArrayList;
 
 public class UserAdapter extends BaseAdapter {
     Context context;
-    ArrayList<User> list;
-    public UserAdapter(Context context, ArrayList<User> list) {
+    ArrayList<User> listUser;
+    public UserAdapter(Context context, ArrayList<User> listUser) {
         this.context = context;
-        this.list = list;
+        this.listUser = listUser;
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return listUser.size();
     }
 
     @Override

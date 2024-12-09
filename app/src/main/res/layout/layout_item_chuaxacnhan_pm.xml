@@ -1,0 +1,83 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@drawable/item_background">
+
+    <!-- Hình ảnh -->
+    <ImageView
+        android:id="@+id/imgSachMuon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:background="#CCCCCC" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtTenSachChuaXacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên sách"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:paddingBottom="14dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/txtTheLoaiChuaXacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="20dp"
+            android:text="Thể loại"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/txtNguoiMuonChuaXacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Người mượn: "
+            android:textSize="18sp"
+            android:paddingBottom="20dp" />
+        <TextView
+            android:id="@+id/txtThoiGianMuonCXN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:text="Thời gian mượn:"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/txtThoiGianTraCXN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thời gian trả:"
+            android:textSize="18sp"
+            android:paddingBottom="20dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/btnDongY"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:text="Đồng ý"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btnHuy"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:text="Hủy" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
