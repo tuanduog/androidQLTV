@@ -71,6 +71,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
             if (viewType == 0) {
                 // Layout cho "Phieu muon"
                 convertView = inflater.inflate(R.layout.layout_item_ql_phieumuon, parent, false);
+                // Anh xa
                 TextView txtPhieuMuonID = (TextView) convertView.findViewById(R.id.txtIDPM);
                 TextView txtTenSach = (TextView) convertView.findViewById(R.id.txtTenSachPM);
                 TextView txtNguoiMuon = (TextView) convertView.findViewById(R.id.txtNguoiMuonPM);
@@ -79,7 +80,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                 Button btnSua = (Button) convertView.findViewById(R.id.btnSuaPM);
                 Button btnXoa = (Button) convertView.findViewById(R.id.btnXoaPM);
                 Button btnXacNhanTra = (Button) convertView.findViewById(R.id.btnXacNhanTra);
-
+                //Truy van phieu muon
                 Cursor cursor= database.rawQuery(
                         "SELECT PHIEUMUON.PHIEUMUONID, TAILIEU.TENTAILIEU, NGUOIDUNG.FULLNAME, " +
                                 " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA  FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
@@ -104,6 +105,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
             } else {
                 // Layout cho "Phieu tra "
                 convertView = inflater.inflate(R.layout.layout_item_ql_phieutra ,parent, false);
+                //anh xa
                 TextView txtPhieuMuonID = (TextView) convertView.findViewById(R.id.txtIDPT);
                 TextView txtTenSach = (TextView) convertView.findViewById(R.id.txtTenSachPT);
                 TextView txtNguoiMuon = (TextView) convertView.findViewById(R.id.txtNguoiMuonPT);

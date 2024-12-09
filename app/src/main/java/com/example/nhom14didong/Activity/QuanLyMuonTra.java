@@ -75,6 +75,29 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 btnPhieuMuon.setTextColor(getResources().getColor(R.color.black));
             }
         });
+        btnTimKiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyword = edtTimKiem.getText().toString().trim();
+                if (keyword.isEmpty()) {
+                    Toast.makeText(QuanLyMuonTra.this, "Vui lòng nhập từ khóa tìm kiếm", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    list.clear();
+                    list.addAll(searchPhieuMuon(keyword, tinhTrang,ngayTra, database));
+                    adapter.notifyDataSetChanged();
+                    if (list.isEmpty()) {
+                        Toast.makeText(QuanLyMuonTra.this, "Không tìm thấy kết quả phù hợp", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(QuanLyMuonTra.this, "Đã xảy ra lỗi khi tìm kiếm: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
     }
 
     private void readData(String tinhTrang) {
@@ -97,27 +120,64 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 int taiLieuID = cursor.getInt(2);
                 String ngayMuon = cursor.getString(3);
                 String ngayHenTra = cursor.getString(4);
-                String ngayTra = cursor.getString(5);
+                String ngayTraReal = cursor.getString(5);
                 String tinhTrangPM = cursor.getString(6);
                 String ghiChu = cursor.getString(7);
                 String ngayTao = cursor.getString(8);
-                list.add(new PhieuMuon(phieuMuonID, userID, taiLieuID, ngayMuon, ngayHenTra, ngayTra, tinhTrangPM, ghiChu, ngayTao));
+                list.add(new PhieuMuon(phieuMuonID, userID, taiLieuID, ngayMuon, ngayHenTra, ngayTraReal, tinhTrangPM, ghiChu, ngayTao));
             }
             adapter.notifyDataSetChanged();
             cursor.close();
         }
 
         if (list.isEmpty()) {
-            Toast.makeText(this, "Danh sách phiếu mượn trống", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Danh sách  trống", Toast.LENGTH_SHORT).show();
         }
 
     }
 
     private void anhXa(){
-        listView = findViewById(R.id.lvDSPM);
+        listView = findViewById(R.id.lvQLPhieuMuonTra);
         btnPhieuMuon= findViewById(R.id.btnQLPhieuMuon);
         btnPhieuTra= findViewById(R.id.btnQLPhieuTra);
         btnTimKiem= findViewById(R.id.btnTimKiemMuonTra);
         edtTimKiem= findViewById(R.id.edt_TimKiemMuonTra);
     }
+    private ArrayList<PhieuMuon> searchPhieuMuon(String keyword, String tinhTrang,String ngayTra, SQLiteDatabase database) {
+        ArrayList<PhieuMuon> resultList = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT PHIEUMUONID, PHIEUMUON.USERID, PHIEUMUON.TAILIEUID, NGAYMUON, NGAYHENTRA, NGAYTRA, PHIEUMUON.TINHTRANG, GHICHU, PHIEUMUON.NGAYTAO " +
+                    "FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID " +
+                    "WHERE PHIEUMUON.TINHTRANG = ? AND (PHIEUMUONID LIKE ? OR PHIEUMUON.USERID LIKE ?  OR NGUOIDUNG.FULLNAME LIKE ? OR TAILIEU.TENTAILIEU LIKE ?)";
+            String searchKeyword = "%" + keyword + "%";
+
+            if (ngayTra == null) {
+                query += " AND NGAYTRA IS NULL";
+            } else {
+                query += " AND NGAYTRA IS NOT NULL";
+            }
+            cursor = database.rawQuery(query, new String[]{tinhTrang, searchKeyword, searchKeyword, searchKeyword, searchKeyword});
+            while (cursor.moveToNext()) {
+                int phieuMuonID = cursor.getInt(0);
+                int userID = cursor.getInt(1);
+                int taiLieuID = cursor.getInt(2);
+                String ngayMuon = cursor.getString(3);
+                String ngayHenTra = cursor.getString(4);
+                String ngayTraReal = cursor.getString(5);
+                String tinhTrangPM = cursor.getString(6);
+                String ghiChu = cursor.getString(7);
+                String ngayTao = cursor.getString(8);
+                resultList.add(new PhieuMuon(phieuMuonID, userID, taiLieuID, ngayMuon, ngayHenTra, ngayTraReal, tinhTrangPM, ghiChu, ngayTao));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return resultList;
+    }
+
 }
