@@ -162,18 +162,18 @@ public class PhieuMuonAdapter extends BaseAdapter {
                     imgSachMuon.setImageBitmap(bitmap);
                     txtTenSach.setText(tenSach);
                     txtTheLoai.setText(theLoai);
-                    txtNguoiMuon.setText("Người muượn: "+cursor.getString(3));
-                    txtThoiGianMuon.setText("Ngày muợn mượn: "+cursor.getString(4));
+                    txtNguoiMuon.setText("Người mượn: "+cursor.getString(3));
+                    txtThoiGianMuon.setText("Ngày mượn: "+cursor.getString(4));
                     txtThoiGianTra.setText("Ngày hẹn trả: "+cursor.getString(5));
                 }
                 if (cursor!=null) {
                     cursor.close();
                 }
-                return convertView;
+                        return convertView;
 
             }
-        }
-        return convertView;
+                    }
+                    return convertView;
     }
 
-}
+            }
