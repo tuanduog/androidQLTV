@@ -192,11 +192,10 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                         String ngayHenTraMoi = edtNgayHenTra.getText().toString();
 
                                         // Cập nhật cơ sở dữ liệu
-                                        String updateQuery = "UPDATE PHIEUMUON SET , NGAYMUON = ?, NGAYHENTRA = ? WHERE PHIEUMUONID = ?";
+                                        String updateQuery = "UPDATE PHIEUMUON SET NGAYMUON = ?, NGAYHENTRA = ? WHERE PHIEUMUONID = ?";
                                         database.execSQL(updateQuery, new Object[]{ ngayMuonMoi, ngayHenTraMoi, pm.phieuMuonID});
                                         txtNgayMuon.setText(ngayMuonMoi);
                                         txtNgayHenTra.setText(ngayHenTraMoi);
-
                                         Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
                                     }
