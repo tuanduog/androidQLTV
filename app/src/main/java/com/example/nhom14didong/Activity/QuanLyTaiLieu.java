@@ -31,11 +31,7 @@ public class QuanLyTaiLieu extends AppCompatActivity {
 
         listView = findViewById(R.id.lv);
         btnThem = findViewById(R.id.btnThem);
-
-        // Open the database (you can replace this with your actual database helper)
         database = openOrCreateDatabase("mydatabase.db", MODE_PRIVATE, null);
-
-        // Fetch data from the database and set up the adapter
         loadDataFromDatabase();
 
         btnThem.setOnClickListener(v -> {
@@ -45,11 +41,9 @@ public class QuanLyTaiLieu extends AppCompatActivity {
     }
 
     private void loadDataFromDatabase() {
-        // Query to fetch all records from the database table (replace "your_table_name" with actual table name)
         String query = "SELECT * FROM TAILIEU";
         Cursor cursor = database.rawQuery(query, null);
 
-        // Create and set the adapter
         adapter = new TaiLieuAdapter(this, cursor);
         listView.setAdapter(adapter);
     }
