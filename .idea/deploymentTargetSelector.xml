@@ -11,10 +11,10 @@
       <SelectionState runConfigName="DangNhap">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="dsphieumuon">
+      <SelectionState runConfigName="QuanLyMuonTra">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="QuanLyMuonTra">
+      <SelectionState runConfigName="QuanLyTaiLieu">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
