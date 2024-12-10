@@ -34,6 +34,12 @@
             android:name=".Activity.QuanLyTaiLieu"
             android:exported="true" />
         <activity
+            android:name=".Activity.ThemSach"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.SuaSach"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

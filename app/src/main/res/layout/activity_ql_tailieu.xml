@@ -16,13 +16,15 @@
         android:layout_height="2dp"
         android:background="@android:color/black" />
     <ListView
+        android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
     <Button
+        android:id="@+id/btnThem"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@color/black"
         android:text="Thêm tài liệu"
         android:textSize="20sp" />
