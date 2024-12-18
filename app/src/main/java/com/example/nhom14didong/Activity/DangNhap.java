@@ -68,11 +68,17 @@ public class DangNhap extends AppCompatActivity {
 
             if (cursor != null && cursor.moveToFirst()) {
                 String userName = cursor.getString(cursor.getColumnIndexOrThrow("USERNAME"));
+                String role = cursor.getString(cursor.getColumnIndexOrThrow("ROLE"));
                 Toast.makeText(this, "Đăng nhập thành công: " + userName, Toast.LENGTH_SHORT).show();
                 cursor.close();
                  // Chuyển sang màn hình HomeActivity
-                 Intent intent = new Intent(DangNhap.this, HomePage.class);
-                 startActivity(intent);
+                if(role.equalsIgnoreCase("user")){
+                    Intent intent = new Intent(DangNhap.this, HomePage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent1 = new Intent(DangNhap.this, Admin_Homepage.class);
+                    startActivity(intent1);
+                }
             } else {
                 Toast.makeText(this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
             }
