@@ -1,5 +1,6 @@
 package com.example.nhom14didong.Activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class DangKy extends AppCompatActivity {
     SQLiteDatabase database=null;
     String DATABASE_NAME="QLThuVien1.db";
     private EditText edtUsername, edtPassword;
-    private Button btnDangKy;
+    private Button btnDangKy, btnQuaylai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +39,20 @@ public class DangKy extends AppCompatActivity {
         edtUsername = findViewById(R.id.edtTaiKhoanDK);
         edtPassword = findViewById(R.id.edtMatKhauDK1);
         btnDangKy = findViewById(R.id.btnTaoTaiKhoan);
+        btnQuaylai = findViewById(R.id.btnQuayLai);
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DangKyTaiKhoan();
             }
         });
-
+        btnQuaylai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DangKy.this, Start.class);
+                startActivity(intent);
+            }
+        });
     }
     private void DangKyTaiKhoan() {
         String username = edtUsername.getText().toString().trim();
@@ -67,13 +75,15 @@ public class DangKy extends AppCompatActivity {
 
         // Thêm tài khoản vào cơ sở dữ liệu
         try {
-            String query = "INSERT INTO NguoiDung (UserName,UserPass) VALUES ('" + username + "', '" + password + "')";
+            String query = "INSERT INTO NguoiDung (UserName,UserPass, Role) VALUES ('" + username + "', '" + password + "', 'user ')";
             database.execSQL(query);
             Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
 
             // Xóa nội dung nhập sau khi đăng ký thành công
             edtUsername.setText("");
             edtPassword.setText("");
+            Intent intent = new Intent(DangKy.this, DangNhap.class);
+            startActivity(intent);
 
         } catch (Exception e) {
             e.printStackTrace();

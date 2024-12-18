@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Nhom14DiDong"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.Start"
+            android:exported="true" />
+        <activity
             android:name=".Activity.QuanLyMuonTra"
             android:exported="true" />
         <activity
