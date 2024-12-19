@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class QuanLyTaiLieu extends AppCompatActivity {
 
-    private ListView listView;
+    private ListView lv;
     private Button btnThem;
     private TaiLieuAdapter adapter;
     private SQLiteDatabase database;
@@ -29,7 +29,7 @@ public class QuanLyTaiLieu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ql_tailieu); // Use your actual layout file
 
-        listView = findViewById(R.id.lv);
+        lv = findViewById(R.id.lv);
         btnThem = findViewById(R.id.btnThem);
         database = openOrCreateDatabase("mydatabase.db", MODE_PRIVATE, null);
         loadDataFromDatabase();
@@ -45,7 +45,7 @@ public class QuanLyTaiLieu extends AppCompatActivity {
         Cursor cursor = database.rawQuery(query, null);
 
         adapter = new TaiLieuAdapter(this, cursor);
-        listView.setAdapter(adapter);
+        lv.setAdapter(adapter);
     }
     @Override
     protected void onResume() {

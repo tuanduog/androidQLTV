@@ -3,6 +3,7 @@ package com.example.nhom14didong.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +27,7 @@ import java.io.OutputStream;
 public class DangKy extends AppCompatActivity {
     String DB_PATH_SUFFIX = "/databases/";
     SQLiteDatabase database=null;
-    String DATABASE_NAME="QLThuVien1.db";
+    String DATABASE_NAME="mydatabase.db";
     private EditText edtUsername, edtPassword;
     private Button btnDangKy, btnQuaylai;
 
@@ -75,7 +76,7 @@ public class DangKy extends AppCompatActivity {
 
         // Thêm tài khoản vào cơ sở dữ liệu
         try {
-            String query = "INSERT INTO NguoiDung (UserName,UserPass, Role) VALUES ('" + username + "', '" + password + "', 'user ')";
+            String query = "INSERT INTO NGUOIDUNG (USERNAME, USERPASS, ROLE) VALUES ('" + username + "', '" + password + "', 'user')";
             database.execSQL(query);
             Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
 
