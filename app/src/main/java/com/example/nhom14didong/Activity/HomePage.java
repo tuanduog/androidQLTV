@@ -11,7 +11,7 @@ import com.example.nhom14didong.Database.Database;
 import com.example.nhom14didong.R;
 
 public class HomePage extends AppCompatActivity {
-    ImageButton imgbtnDSTL;
+    ImageButton imgbtnDSTL, imgbtnTimKiem;
     FrameLayout flDSTaiLieu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +19,13 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_homepage);
         imgbtnDSTL = findViewById(R.id.imgbtnDSTL);
         flDSTaiLieu = findViewById(R.id.flDSTaiLieu);
+        imgbtnTimKiem = findViewById(R.id.imgbtnTimKiem);
         imgbtnDSTL.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, DanhSachTaiLieu.class);
+            startActivity(intent);
+        });
+        imgbtnTimKiem.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, TimKiem.class);
             startActivity(intent);
         });
         flDSTaiLieu.setOnClickListener(v -> {
