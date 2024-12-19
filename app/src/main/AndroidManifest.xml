@@ -16,6 +16,12 @@
             android:name=".Activity.Start"
             android:exported="true" />
         <activity
+            android:name=".Activity.XemThongKe"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.ThongKeChiTiet"
+            android:exported="true" />
+        <activity
             android:name=".Activity.QuanLyMuonTra"
             android:exported="true" />
         <activity
