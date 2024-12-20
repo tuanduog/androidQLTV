@@ -11,18 +11,17 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.example.nhom14didong.Activity.SuaSach;
 import com.example.nhom14didong.R;
 
-import java.io.File;
-
-public class TaiLieuAdapter extends BaseAdapter {
+public class TaiLieuAdapter_us extends BaseAdapter {
     private Context context;
     private Cursor cursor;
     private LayoutInflater inflater;
 
-    public TaiLieuAdapter(Context context, Cursor cursor) {
+    public TaiLieuAdapter_us(Context context, Cursor cursor) {
         this.context = context;
         this.cursor = cursor;
         this.inflater = LayoutInflater.from(context);
@@ -55,7 +54,7 @@ public class TaiLieuAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.activity_tailieu, parent, false);
+            convertView = inflater.inflate(R.layout.activity_tailieu1, parent, false);
         }
 
         if (cursor.moveToPosition(position)) {
@@ -67,6 +66,7 @@ public class TaiLieuAdapter extends BaseAdapter {
             int imagePathIndex = cursor.getColumnIndex("IMAGE");
             int itemIdIndex = cursor.getColumnIndex("TAILIEUID");
 
+            // Fetch the data from the cursor
             String bookName = (bookNameIndex != -1) ? cursor.getString(bookNameIndex) : "Unknown Book Name";
             String category = (categoryIndex != -1) ? cursor.getString(categoryIndex) : "Unknown Category";
             String count = (countIndex != -1) ? cursor.getString(countIndex) : "0";
@@ -104,50 +104,7 @@ public class TaiLieuAdapter extends BaseAdapter {
                 bookImageView.setImageResource(R.drawable.book_img);
             }
 
-            Button btnFix = convertView.findViewById(R.id.btnFix);
-            Button btnDelete = convertView.findViewById(R.id.btnDelete);
-
-            // Handle Sửa button click
-            btnFix.setOnClickListener(v -> {
-                // Create intent for updating data
-                Intent intent = new Intent(context, SuaSach.class);
-                intent.putExtra("BOOK_NAME", bookName);
-                intent.putExtra("CATEGORY", category);
-                intent.putExtra("COUNT", count);
-                intent.putExtra("STATUS", status);
-                intent.putExtra("IMAGE_PATH", imagePath);
-                intent.putExtra("ITEM_ID", itemId);
-                // Start SuaSach activity to edit
-                context.startActivity(intent);
-            });
-
-            // Handle Xóa button click
-            btnDelete.setOnClickListener(v -> {
-                long itemIdToDelete = getItemId(position);
-
-                if (itemIdToDelete != -1) {
-                    // Get db
-                    SQLiteDatabase db = context.openOrCreateDatabase("mydatabase.db", Context.MODE_PRIVATE, null);
-
-                    String whereClause = "TAILIEUID = ?";
-                    String[] whereArgs = {String.valueOf(itemIdToDelete)};
-
-                    // Delete from db
-                    int rowsDeleted = db.delete("TAILIEU", whereClause, whereArgs);
-
-                    // Check delete
-                    if (rowsDeleted > 0) {
-                        // Refresh the cursor data and update the adapter
-                        cursor.requery();
-                        notifyDataSetChanged();
-                    }
-
-                    db.close();
-                }
-            });
         }
-
         return convertView;
     }
-
 }

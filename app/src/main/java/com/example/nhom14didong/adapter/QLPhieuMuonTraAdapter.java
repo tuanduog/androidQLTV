@@ -101,7 +101,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                 TextView txtNgayHenTra = (TextView) convertView.findViewById(R.id.txtNgayHenTraPM);
                 Button btnSua = (Button) convertView.findViewById(R.id.btnSuaPM);
                 Button btnXoa = (Button) convertView.findViewById(R.id.btnXoaPM);
-                Button btnXacNhanTra = (Button) convertView.findViewById(R.id.btnDaXacNhanPM);
+                Button btnXacNhanTra = (Button) convertView.findViewById(R.id.btnXacNhanTra);
                 //Truy van phieu muon
                 Cursor cursor= database.rawQuery(
                         "SELECT PHIEUMUON.PHIEUMUONID, TAILIEU.TENTAILIEU, NGUOIDUNG.FULLNAME, " +
