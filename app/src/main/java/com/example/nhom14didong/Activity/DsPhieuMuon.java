@@ -3,7 +3,6 @@ package com.example.nhom14didong.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,7 +16,7 @@ import com.example.nhom14didong.adapter.PhieuMuonAdapter;
 
 import java.util.ArrayList;
 
-public class dsphieumuon extends AppCompatActivity {
+public class DsPhieuMuon extends AppCompatActivity {
     final String DATABASE_NAME = "mydatabase.db";
     SQLiteDatabase database;
     ListView listView;
