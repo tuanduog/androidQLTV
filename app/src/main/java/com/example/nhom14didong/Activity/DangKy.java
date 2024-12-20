@@ -87,6 +87,7 @@ public class DangKy extends AppCompatActivity {
         }
         if(!password1.equals(password2)){
             Toast.makeText(this, "Mật khẩu xác nhận không đúng!", Toast.LENGTH_SHORT).show();
+            return;
         }
         cursor.close();
 

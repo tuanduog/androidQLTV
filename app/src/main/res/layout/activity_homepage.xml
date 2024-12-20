@@ -79,6 +79,7 @@
                 android:background="@drawable/border"
                 >
                 <ImageButton
+                    android:id="@+id/imgbtnDSPM"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
                     android:src="@drawable/list"
@@ -217,7 +218,7 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/cart"/>
             <ImageButton
-
+                android:id="@+id/imgbtnProfile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="fitCenter"

@@ -1,6 +1,7 @@
 package com.example.nhom14didong.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -69,6 +70,11 @@ public class DangNhap extends AppCompatActivity {
             if (cursor != null && cursor.moveToFirst()) {
                 String userName = cursor.getString(cursor.getColumnIndexOrThrow("USERNAME"));
                 String role = cursor.getString(cursor.getColumnIndexOrThrow("ROLE"));
+                String userID = cursor.getString(cursor.getColumnIndexOrThrow("USERID"));
+                SharedPreferences preferences = getSharedPreferences("UserPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("USERID", userID);
+                editor.apply();
                 Toast.makeText(this, "Đăng nhập thành công: " + userName, Toast.LENGTH_SHORT).show();
                 cursor.close();
                  // Chuyển sang màn hình HomeActivity
