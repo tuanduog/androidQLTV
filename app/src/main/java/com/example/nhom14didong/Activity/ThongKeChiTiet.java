@@ -3,7 +3,9 @@ package com.example.nhom14didong.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.TableLayout;
@@ -72,21 +74,45 @@ public class ThongKeChiTiet extends AppCompatActivity {
                 // Tạo + thêm các TextView vào TableRow
                 TextView phieuMuonIDText = new TextView(this);
                 phieuMuonIDText.setText(phieuMuonID);
-                phieuMuonIDText.setPadding(8, 8, 8, 8);
+                phieuMuonIDText.setPadding(0, 8, 0, 8);
                 phieuMuonIDText.setGravity(Gravity.CENTER);
                 phieuMuonIDText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                phieuMuonIDText.setBackgroundResource(R.drawable.cell_border);
+                phieuMuonIDText.setHeight(100);
+                phieuMuonIDText.setTextColor(Color.BLACK);
 
                 TextView tenTaiLieuText = new TextView(this);
                 tenTaiLieuText.setText(tenTL);
-                tenTaiLieuText.setPadding(8, 8, 8, 8);
+                tenTaiLieuText.setPadding(8, 0, 8, 0);
                 tenTaiLieuText.setGravity(Gravity.CENTER);
                 tenTaiLieuText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                tenTaiLieuText.setMaxLines(2);
+                tenTaiLieuText.setEllipsize(TextUtils.TruncateAt.END);
+                tenTaiLieuText.setMaxWidth(190);
+                tenTaiLieuText.setHeight(100);
+                tenTaiLieuText.setTextColor(Color.BLACK);
+                tenTaiLieuText.setBackgroundResource(R.drawable.cell_border);
+                tenTaiLieuText.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int lineCount = tenTaiLieuText.getLineCount();
+                        if (lineCount == 2) {
+                            // Nếu số dòng là 2, thay đổi marginTop
+                            TableRow.LayoutParams params = (TableRow.LayoutParams) tenTaiLieuText.getLayoutParams();
+                            params.topMargin = -16; // Thêm marginTop 10
+                            tenTaiLieuText.setLayoutParams(params);
+                        }
+                    }
+                });
 
                 TextView tinhTrangText = new TextView(this);
                 tinhTrangText.setText(tinhTrang);
                 tinhTrangText.setPadding(8, 8, 8, 8);
                 tinhTrangText.setGravity(Gravity.CENTER);
                 tinhTrangText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                tinhTrangText.setBackgroundResource(R.drawable.cell_border);
+                tinhTrangText.setHeight(100);
+                tinhTrangText.setTextColor(Color.BLACK);
 
                 // Thêm các TextView vào TableRow
                 tableRow.addView(phieuMuonIDText);
@@ -95,7 +121,7 @@ public class ThongKeChiTiet extends AppCompatActivity {
 
                 // Thêm TableRow vào TableLayout
                 tbPhieuMuon.addView(tableRow);
-            } while (cursor.moveToNext());
+            } while (cursor1.moveToNext());
         }
     }
 }

@@ -19,6 +19,9 @@
             android:name=".Activity.XemThongKe"
             android:exported="true" />
         <activity
+            android:name=".Activity.UserProfile"
+            android:exported="true" />
+        <activity
             android:name=".Activity.ThongKeChiTiet"
             android:exported="true" />
         <activity
