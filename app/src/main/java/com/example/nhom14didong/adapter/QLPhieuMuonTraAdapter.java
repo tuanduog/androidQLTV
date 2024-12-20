@@ -94,7 +94,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                 // Layout cho "Phieu muon"
                 convertView = inflater.inflate(R.layout.layout_item_ql_phieumuon, parent, false);
                 // Anh xa
-                TextView txtPhieuMuonID = (TextView) convertView.findViewById(R.id.txtIDPM);
+
                 TextView txtTenSach = (TextView) convertView.findViewById(R.id.txtTenSachPM);
                 TextView txtNguoiMuon = (TextView) convertView.findViewById(R.id.txtNguoiMuonPM);
                 TextView txtNgayMuon= (TextView) convertView.findViewById(R.id.txtNgayMuonPM);
@@ -114,13 +114,12 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                     String tenNguoiMuon = cursor.getString(2);
                     String ngayMuon = cursor.getString(3);
                     String ngayHenTra = cursor.getString(4);
-                    txtPhieuMuonID.setText(phieuMuonID);
                     txtTenSach.setText(tenSach);
                     txtNguoiMuon.setText(tenNguoiMuon);
                     txtNgayMuon.setText(ngayMuon);
                     txtNgayHenTra.setText(ngayHenTra);
                 }
-                //NUT XOA
+                //NUT XOA done
                 btnXoa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -139,7 +138,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                         builder.create().show();
                     }
                 });
-                //NUT XAC NHAN TRA
+                //NUT XAC NHAN TRA done
                 btnXacNhanTra.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -158,7 +157,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                         builder.create().show();
                     }
                 });
-                //NUT SUA
+                //NUT SUA done
                 btnSua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -213,7 +212,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                 // Layout cho "Phieu tra "
                 convertView = inflater.inflate(R.layout.layout_item_ql_phieutra ,parent, false);
                 //anh xa
-                TextView txtPhieuMuonID = (TextView) convertView.findViewById(R.id.txtIDPT);
+
                 TextView txtTenSach = (TextView) convertView.findViewById(R.id.txtTenSachPT);
                 TextView txtNguoiMuon = (TextView) convertView.findViewById(R.id.txtNguoiMuonPT);
                 TextView txtNgayMuon= (TextView) convertView.findViewById(R.id.txtNgayMuonPT);
@@ -231,7 +230,6 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                     String ngayMuon = cursor.getString(3);
                     String ngayHenTra = cursor.getString(4);
                     String ngayTra = cursor.getString(5);
-                    txtPhieuMuonID.setText(phieuMuonID);
                     txtTenSach.setText(tenSach);
                     txtNguoiMuon.setText(tenNguoiMuon);
                     txtNgayMuon.setText(ngayMuon);

@@ -9,16 +9,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.nhom14didong.Database.Database;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
-import com.example.nhom14didong.adapter.PhieuMuonAdapter;
 import com.example.nhom14didong.adapter.QLPhieuMuonTraAdapter;
 
 import java.util.ArrayList;
@@ -35,27 +30,33 @@ public class QuanLyMuonTra extends AppCompatActivity {
     EditText edtTimKiem;
     private String tinhTrang;
     private String ngayTra;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly_muon_tra);
+
         list = new ArrayList<>();
         database = Database.initDatabase(this, DATABASE_NAME);
         adapter = new QLPhieuMuonTraAdapter(this, list, database, ngayTra);
+
         anhXa();
         listView.setAdapter(adapter);
-        //Mặc định la Quan ly phieu muon
+
+        // Mặc định là Quản lý phiếu mượn
         btnPhieuMuon.setBackgroundResource(R.drawable.button_selected);
         btnPhieuMuon.setTextColor(getResources().getColor(R.color.white));
         btnPhieuTra.setBackgroundResource(R.drawable.button_default);
         btnPhieuTra.setTextColor(getResources().getColor(R.color.black));
-        tinhTrang="Đã xác nhận"; //Mac dinh
-        ngayTra= null;//Mac dinh
+        tinhTrang = "Đã xác nhận"; // Mặc định
+        ngayTra = null; // Mặc định
         readData(tinhTrang);
+
+        // Cài đặt sự kiện cho btnPhieuMuon
         btnPhieuMuon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ngayTra=null;
+                ngayTra = null;
                 adapter.setNgayTra(ngayTra);
                 readData(tinhTrang);
                 btnPhieuMuon.setBackgroundResource(R.drawable.button_selected);
@@ -64,10 +65,12 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 btnPhieuTra.setTextColor(getResources().getColor(R.color.black));
             }
         });
+
+        // Cài đặt sự kiện cho btnPhieuTra
         btnPhieuTra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ngayTra="datra";
+                ngayTra = "datra";
                 adapter.setNgayTra(ngayTra);
                 readData(tinhTrang);
                 btnPhieuTra.setBackgroundResource(R.drawable.button_selected);
@@ -76,6 +79,12 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 btnPhieuMuon.setTextColor(getResources().getColor(R.color.black));
             }
         });
+
+        timKiem();
+    }
+
+    // Hàm tìm kiếm
+    private void timKiem() {
         btnTimKiem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +96,7 @@ public class QuanLyMuonTra extends AppCompatActivity {
 
                 try {
                     list.clear();
-                    list.addAll(searchPhieuMuon(keyword, tinhTrang,ngayTra, database));
+                    list.addAll(searchPhieuMuon(keyword, tinhTrang, ngayTra, database));
                     adapter.notifyDataSetChanged();
                     if (list.isEmpty()) {
                         Toast.makeText(QuanLyMuonTra.this, "Không tìm thấy kết quả phù hợp", Toast.LENGTH_SHORT).show();
@@ -97,22 +106,21 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
+    // Hàm đọc dữ liệu từ database
     private void readData(String tinhTrang) {
-        String queryy="SELECT PHIEUMUONID,USERID, TAILIEUID, NGAYMUON," +
-                " NGAYHENTRA, NGAYTRA, TINHTRANG," +
+        String query = "SELECT PHIEUMUONID,USERID, TAILIEUID, NGAYMUON, " +
+                "NGAYHENTRA, NGAYTRA, TINHTRANG, " +
                 "GHICHU, NGAYTAO FROM PHIEUMUON " +
                 "WHERE TINHTRANG=? ";
         if (ngayTra == null) {
-            queryy += " AND NGAYTRA IS NULL";
+            query += " AND NGAYTRA IS NULL";
         } else {
-            queryy += " AND NGAYTRA IS NOT NULL";
+            query += " AND NGAYTRA IS NOT NULL";
         }
-        Cursor cursor = database.rawQuery(
-                queryy, new String[]{tinhTrang});
+
+        Cursor cursor = database.rawQuery(query, new String[]{tinhTrang});
         list.clear();
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -130,21 +138,22 @@ public class QuanLyMuonTra extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             cursor.close();
         }
-
         if (list.isEmpty()) {
-            Toast.makeText(this, "Danh sách  trống", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Danh sách trống", Toast.LENGTH_SHORT).show();
         }
-
     }
 
-    private void anhXa(){
+    // Phương thức khởi tạo các view
+    private void anhXa() {
         listView = findViewById(R.id.lvQLPhieuMuonTra);
-        btnPhieuMuon= findViewById(R.id.btnQLPhieuMuon);
-        btnPhieuTra= findViewById(R.id.btnQLPhieuTra);
-        btnTimKiem= findViewById(R.id.btnTimKiemMuonTra);
-        edtTimKiem= findViewById(R.id.edt_TimKiemMuonTra);
+        btnPhieuMuon = findViewById(R.id.btnQLPhieuMuon);
+        btnPhieuTra = findViewById(R.id.btnQLPhieuTra);
+        btnTimKiem = findViewById(R.id.btnTimKiemMuonTra);
+        edtTimKiem = findViewById(R.id.edt_TimKiemMuonTra);
     }
-    private ArrayList<PhieuMuon> searchPhieuMuon(String keyword, String tinhTrang,String ngayTra, SQLiteDatabase database) {
+
+    // Hàm tìm kiếm phiếu mượn
+    private ArrayList<PhieuMuon> searchPhieuMuon(String keyword, String tinhTrang, String ngayTra, SQLiteDatabase database) {
         ArrayList<PhieuMuon> resultList = new ArrayList<>();
         Cursor cursor = null;
 
@@ -180,5 +189,4 @@ public class QuanLyMuonTra extends AppCompatActivity {
 
         return resultList;
     }
-
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- UserID -->
+    <EditText
+        android:id="@+id/edtUserID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập UserID"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="@color/black"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="12dp" />
+
+    <!-- TaiLieuID -->
+    <EditText
+        android:id="@+id/edtTaiLieuID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập ID tài liệu"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="@color/black"
+        android:inputType="text"
+        android:layout_marginBottom="12dp" />
+
+    <!-- NgayMuon -->
+    <EditText
+        android:id="@+id/edtNgayMuon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập Ngày Mượn (YYYY-MM-DD)"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="@color/black"
+        android:inputType="none"
+        android:focusable="false"
+        android:clickable="true"
+        android:layout_marginBottom="12dp" />
+
+    <!-- NgayHenTra -->
+    <EditText
+        android:id="@+id/edtNgayHenTra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập Ngày Hẹn Trả (YYYY-MM-DD)"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="@color/black"
+        android:inputType="none"
+        android:focusable="false"
+        android:clickable="true"
+        android:layout_marginBottom="12dp" />
+
+    <!-- GhiChu -->
+    <EditText
+        android:id="@+id/edtGhiChu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập ghi chú"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="@color/black"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Button Lưu -->
+    <Button
+        android:id="@+id/btnLuuPhieuMuon"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Lưu"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background_primary"
+        android:textStyle="bold" />
+
+</LinearLayout>

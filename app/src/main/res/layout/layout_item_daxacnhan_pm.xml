@@ -3,17 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="@drawable/item_background">
+    android:padding="12dp"
+    android:background="@drawable/item_background"
+    android:layout_margin="8dp"
+    android:elevation="4dp">
 
     <!-- Hình ảnh -->
     <ImageView
         android:id="@+id/imgSachMuonDXN"
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:background="#CCCCCC"
-        /> <!-- Placeholder cho ảnh -->
+        android:layout_height="120dp"
+        android:layout_marginEnd="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_placeholder_image"
+        android:background="@drawable/image_background"
+ />
 
     <!-- Nội dung -->
     <LinearLayout
@@ -29,40 +33,47 @@
             android:text="Tên sách"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:paddingBottom="14dp"
-            android:layout_gravity="center"/>
+            android:textColor="@color/black"
+            android:paddingBottom="8dp"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
         <TextView
             android:id="@+id/txtTheLoaiDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thể loại"
-            android:textSize="18sp"
-            android:paddingBottom="20dp"
-            android:layout_gravity="center"/>
+            android:textSize="16sp"
+            android:textColor="@color/gray"
+            android:paddingBottom="6dp"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
         <TextView
             android:id="@+id/txtNguoiMuonDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
             android:text="Người mượn:"
-            android:textSize="18sp" />
+            android:textSize="16sp"
+            android:textColor="@color/dark_gray"
+            android:paddingBottom="6dp" />
 
         <TextView
             android:id="@+id/txtThoiGianMuonDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:text="Thời gian mượn:"
-            android:textSize="18sp" />
+            android:text="Thời gian mượn: "
+            android:textSize="16sp"
+            android:textColor="@color/dark_gray"
+            android:paddingBottom="6dp" />
 
         <TextView
             android:id="@+id/txtThoiGianTraDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thời gian trả:"
-            android:textSize="18sp"
-            android:paddingBottom="20dp"
-/>
-
+            android:textSize="16sp"
+            android:textColor="@color/dark_gray"
+            android:paddingBottom="10dp" />
     </LinearLayout>
 </LinearLayout>
