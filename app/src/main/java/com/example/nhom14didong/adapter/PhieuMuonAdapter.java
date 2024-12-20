@@ -141,7 +141,7 @@ public class PhieuMuonAdapter extends BaseAdapter {
                     cursor.close();
                 }
                 return convertView;
-            } else {
+            } else  if (viewType == 1){
                 // Layout cho "Đã xác nhận"
                 convertView = inflater.inflate(R.layout.layout_item_daxacnhan_pm, parent, false);
                 ImageView imgSachMuon = convertView.findViewById(R.id.imgSachMuonDXN);
@@ -149,7 +149,7 @@ public class PhieuMuonAdapter extends BaseAdapter {
                 TextView txtTheLoai = convertView.findViewById(R.id.txtTheLoaiDXN);
                 TextView txtNguoiMuon = convertView.findViewById(R.id.txtNguoiMuonDXN);
                 TextView txtThoiGianMuon = convertView.findViewById(R.id.txtThoiGianMuonDXN);
-                TextView txtThoiGianTra = convertView.findViewById(R.id.txtThoiGianMuonDXN);
+                TextView txtThoiGianTra = convertView.findViewById(R.id.txtThoiGianTraDXN);
                 Cursor cursor= database.rawQuery(
                         "SELECT TAILIEU.TENTAILIEU, TAILIEU.THELOAI, TAILIEU.IMAGE, NGUOIDUNG.FULLNAME, " +
                                 " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +

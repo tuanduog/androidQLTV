@@ -1,15 +1,19 @@
 package com.example.nhom14didong.Activity;
 
+import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -22,6 +26,7 @@ import com.example.nhom14didong.adapter.PhieuMuonAdapter;
 import com.example.nhom14didong.adapter.QLPhieuMuonTraAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class QuanLyMuonTra extends AppCompatActivity {
     final String DATABASE_NAME = "mydatabase.db";
@@ -32,6 +37,7 @@ public class QuanLyMuonTra extends AppCompatActivity {
     Button btnPhieuMuon;
     Button btnPhieuTra;
     Button btnTimKiem;
+    Button btnThemPhieuMuon;
     EditText edtTimKiem;
     private String tinhTrang;
     private String ngayTra;
@@ -76,6 +82,10 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 btnPhieuMuon.setTextColor(getResources().getColor(R.color.black));
             }
         });
+        timKiem();
+
+    }
+    private void timKiem(){
         btnTimKiem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,9 +107,8 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 }
             }
         });
-
-
     }
+
 
     private void readData(String tinhTrang) {
         String queryy="SELECT PHIEUMUONID,USERID, TAILIEUID, NGAYMUON," +
@@ -143,6 +152,7 @@ public class QuanLyMuonTra extends AppCompatActivity {
         btnPhieuTra= findViewById(R.id.btnQLPhieuTra);
         btnTimKiem= findViewById(R.id.btnTimKiemMuonTra);
         edtTimKiem= findViewById(R.id.edt_TimKiemMuonTra);
+//        btnThemPhieuMuon= findViewById(R.id.btnThemPhieumuon);
     }
     private ArrayList<PhieuMuon> searchPhieuMuon(String keyword, String tinhTrang,String ngayTra, SQLiteDatabase database) {
         ArrayList<PhieuMuon> resultList = new ArrayList<>();
@@ -180,5 +190,6 @@ public class QuanLyMuonTra extends AppCompatActivity {
 
         return resultList;
     }
+
 
 }

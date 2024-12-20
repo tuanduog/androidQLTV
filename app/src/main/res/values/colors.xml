@@ -5,7 +5,21 @@
     <color name="tab_pressed">#AAAAAA</color>
     <color name="tab_selected">#888888</color>
     <color name="tab_default">#DDDDDD</color>
-    <color name="blue">#2196F3</color> <!-- Màu xanh dương khi chọn -->
-    <color name="gray">#BDBDBD</color> <!-- Màu xám mặc định -->
+    <color name="blue">#2196F3</color>
+    <color name="gray">#BDBDBD</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#F44336</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="light_blue">#BBDEFB</color>
+    <color name="light_gray">#E0E0E0</color>
+    <color name="green_dark">#388E3C</color> <!-- Xanh lá đậm -->
+    <color name="blue_dark">#1976D2</color> <!-- Xanh dương đậm -->
+    <color name="red_dark">#D32F2F</color> <!-- Đỏ đậm -->
+    <color name="primary">#1976D2</color>
+    <color name="primary_dark">#004BA0</color>
+    <color name="dark_gray">#666666</color>
+    <color name="accent">#FF4081</color> <!-- Màu accent, bạn có thể thay đổi giá trị -->
+    <color name="secondary">#03DAC6</color> <!-- Màu secondary, bạn có thể thay đổi giá trị -->
+
 
 </resources>
