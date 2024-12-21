@@ -11,7 +11,8 @@ import com.example.nhom14didong.Database.Database;
 import com.example.nhom14didong.R;
 
 public class HomePage extends AppCompatActivity {
-    ImageButton imgbtnDSTL, imgbtnTimKiem, imgbtnDSPM, imgbtnProfile;
+    ImageButton imgbtnDSTL, imgbtnTimKiem, imgbtnDSPM, imgbtnProfile, imgbtnTimKiem2, imgbtnDSTL2
+            , imgbtnDSPM2;
     FrameLayout flDSTaiLieu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,10 @@ public class HomePage extends AppCompatActivity {
         imgbtnTimKiem = findViewById(R.id.imgbtnTimKiem);
         imgbtnDSPM = findViewById(R.id.imgbtnDSPM);
         imgbtnProfile = findViewById(R.id.imgbtnProfile);
+        imgbtnTimKiem2 = findViewById(R.id.imgbtnTimKiem2);
+        imgbtnDSTL2 = findViewById(R.id.imgbtnDSTL2);
+        imgbtnDSPM2 = findViewById(R.id.imgbtnDSPM2);
+
         imgbtnDSTL.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, DanhSachTaiLieu.class);
             startActivity(intent);
@@ -40,6 +45,18 @@ public class HomePage extends AppCompatActivity {
         });
         flDSTaiLieu.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, DanhSachTaiLieu.class);
+            startActivity(intent);
+        });
+        imgbtnTimKiem2.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, TimKiem.class);
+            startActivity(intent);
+        });
+        imgbtnDSTL2.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, DanhSachTaiLieu.class);
+            startActivity(intent);
+        });
+        imgbtnDSPM2.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, DsPhieuMuon.class);
             startActivity(intent);
         });
     }

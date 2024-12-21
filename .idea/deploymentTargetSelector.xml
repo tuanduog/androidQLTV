@@ -14,6 +14,9 @@
       <SelectionState runConfigName="ThongKeChiTiet">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="QuanLyMuonTra">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

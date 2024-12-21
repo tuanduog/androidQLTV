@@ -76,6 +76,8 @@ public class DangNhap extends AppCompatActivity {
                 editor.putString("USERID", userID);
                 editor.apply();
                 Toast.makeText(this, "Đăng nhập thành công: " + userName, Toast.LENGTH_SHORT).show();
+                edtTaiKhoan.setText("");
+                edtMatKhau.setText("");
                 cursor.close();
                  // Chuyển sang màn hình HomeActivity
                 if(role.equalsIgnoreCase("user")){

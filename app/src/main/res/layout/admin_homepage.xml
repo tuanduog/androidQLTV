@@ -145,6 +145,7 @@
                 android:background="@drawable/border"
                 >
                 <ImageButton
+                    android:id="@+id/imgbtnQLPM"
                     android:layout_width="70dp"
                     android:layout_height="60dp"
                     android:src="@drawable/list2"
@@ -195,7 +196,7 @@
                 android:src="@drawable/home" />
 
             <ImageButton
-
+                android:id="@+id/imgbtnXemThongKe2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
@@ -204,22 +205,22 @@
                 android:src="@drawable/book_img" />
 
             <ImageButton
-
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="20dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/search_img" />
-
-            <ImageButton
-
+                android:id="@+id/imgbtnQLTaiLieu2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/cart" />
+                android:src="@drawable/list" />
+
+            <ImageButton
+                android:id="@+id/imgbtnQLPM2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/list2" />
 
             <ImageButton
                 android:id="@+id/imgbtnProfile"
