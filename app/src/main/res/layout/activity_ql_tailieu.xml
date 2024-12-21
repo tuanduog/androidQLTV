@@ -7,8 +7,10 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:text="Quản lý tài liệu"
+        android:background="@color/purpose"
         android:textAlignment="center"
         android:textSize="27sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:gravity="center" />
     <View

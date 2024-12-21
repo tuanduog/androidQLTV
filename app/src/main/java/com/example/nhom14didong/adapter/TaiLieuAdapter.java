@@ -144,7 +144,7 @@ public class TaiLieuAdapter extends BaseAdapter {
                                         cursor.requery();
                                         notifyDataSetChanged();
                                     }
-
+                                    Toast.makeText(context, "Xóa tài liệu thành công", Toast.LENGTH_SHORT).show();
                                     db.close();
                                 }
                                 notifyDataSetChanged();
