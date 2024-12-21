@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,7 +36,6 @@ public class SuaSach extends AppCompatActivity {
         currentImagePath = getIntent().getStringExtra("IMAGE_PATH");
         currentItemId = getIntent().getLongExtra("ITEM_ID", -1);
 
-        // Initialize the EditText views
         edtChonAnh = findViewById(R.id.edtChonAnh);
         edtTenSach = findViewById(R.id.edtTenSach);
         edtLoaiSach = findViewById(R.id.edtLoaiSach);
@@ -58,9 +58,8 @@ public class SuaSach extends AppCompatActivity {
         }
         btnSua = findViewById(R.id.btnSua);
         btnHuy = findViewById(R.id.btnHuy);
-        // Handle Sửa button
+        // sửa
         btnSua.setOnClickListener(v -> {
-            // Get the updated values
             String updatedBookName = edtTenSach.getText().toString();
             String updatedCategory = edtLoaiSach.getText().toString();
             String updatedCount = edtSoLuong.getText().toString();
@@ -101,6 +100,7 @@ public class SuaSach extends AppCompatActivity {
             String[] whereArgs = {String.valueOf(currentItemId)};
 
             db.update("TAILIEU", values, whereClause, whereArgs);
+            Toast.makeText(this, "Sửa sách thành công!", Toast.LENGTH_SHORT).show();
             finish();
         });
 

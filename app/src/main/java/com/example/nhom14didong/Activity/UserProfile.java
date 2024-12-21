@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nhom14didong.R;
 
 public class UserProfile extends AppCompatActivity {
-    private TextView txtUserID, txtuserName, txtEmail, txtHoten;
+    private TextView txtUserID, txtuserName, txtEmail, txtHoten, txtTitle;
     ImageButton imgbtnLogout;
     TextView txtLogout;
     private SQLiteDatabase database;
@@ -29,6 +29,7 @@ public class UserProfile extends AppCompatActivity {
         txtHoten = findViewById(R.id.txtHoten);
         imgbtnLogout = findViewById(R.id.imgbtnLogout);
         txtLogout = findViewById(R.id.txtLogout);
+        txtTitle = findViewById(R.id.txtTitle);
         database = openOrCreateDatabase("mydatabase.db", MODE_PRIVATE, null);
         loadUserProfile();
         imgbtnLogout.setOnClickListener(new View.OnClickListener() {
@@ -55,11 +56,17 @@ public class UserProfile extends AppCompatActivity {
                 String userName = cursor.getString(cursor.getColumnIndexOrThrow("USERNAME"));
                 String userEmail = cursor.getString(cursor.getColumnIndexOrThrow("EMAIL"));
                 String hoTen = cursor.getString(cursor.getColumnIndexOrThrow("FULLNAME"));
+                String role = cursor.getString(cursor.getColumnIndexOrThrow("ROLE"));
 
                 txtUserID.setText(userID);
                 txtuserName.setText(userName);
                 txtEmail.setText(userEmail);
                 txtHoten.setText(hoTen);
+                if(role.equals("user")){
+                    txtTitle.setText("Thông tin người dùng");
+                } else if(role.equals("admin")){
+                    txtTitle.setText("Thông tin admin");
+                }
                 cursor.close();
             } else {
                 Toast.makeText(this, "Nguời dùng không tồn tại!", Toast.LENGTH_SHORT).show();

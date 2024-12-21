@@ -26,7 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:src="@drawable/tv"
-
         android:scaleType="centerCrop"
         android:layout_marginBottom="25dp" />
 
@@ -194,7 +193,7 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/home"/>
             <ImageButton
-
+                android:id="@+id/imgbtnDSTL2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="fitCenter"
@@ -202,7 +201,7 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/book_img"/>
             <ImageButton
-
+                android:id="@+id/imgbtnTimKiem2"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:scaleType="fitCenter"
@@ -210,7 +209,7 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/search_img"/>
             <ImageButton
-
+                android:id="@+id/imgbtnDSPM2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="fitCenter"
