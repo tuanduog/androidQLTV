@@ -100,7 +100,7 @@ public class SuaSach extends AppCompatActivity {
             String[] whereArgs = {String.valueOf(currentItemId)};
 
             db.update("TAILIEU", values, whereClause, whereArgs);
-            Toast.makeText(this, "Sửa sách thành công!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sửa tài liệu thành công!", Toast.LENGTH_SHORT).show();
             finish();
         });
 

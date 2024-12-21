@@ -96,9 +96,9 @@ public class ThemSach extends AppCompatActivity {
             long result = db.insert("TAILIEU", null, values);
 
             if (result == -1) {
-                Toast.makeText(this, "Thêm sách thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Thêm tài liệu thất bại", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Thêm tài liệu thành công", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
