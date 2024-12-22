@@ -68,12 +68,16 @@ public class TaiLieuAdapter extends BaseAdapter {
             int categoryIndex = cursor.getColumnIndex("THELOAI");
             int countIndex = cursor.getColumnIndex("SOLUONG");
             int statusIndex = cursor.getColumnIndex("TINHTRANG");
+            int describeIndex = cursor.getColumnIndex("MOTA");
+            int authorIndex = cursor.getColumnIndex("TACGIA");
             int imagePathIndex = cursor.getColumnIndex("IMAGE");
             int itemIdIndex = cursor.getColumnIndex("TAILIEUID");
 
             String bookName = (bookNameIndex != -1) ? cursor.getString(bookNameIndex) : "Unknown Book Name";
             String category = (categoryIndex != -1) ? cursor.getString(categoryIndex) : "Unknown Category";
             String count = (countIndex != -1) ? cursor.getString(countIndex) : "0";
+            String describe = (describeIndex != -1) ? cursor.getString(describeIndex) : "Unknown describe";
+            String author = (authorIndex != -1) ? cursor.getString(authorIndex) : "Unknown Author";
             String status = (statusIndex != -1) ? cursor.getString(statusIndex) : "Unknown Status";
             String imagePath = (imagePathIndex != -1) ? cursor.getString(imagePathIndex) : "";
             long itemId = (itemIdIndex != -1) ? cursor.getLong(itemIdIndex) : -1;
@@ -117,6 +121,8 @@ public class TaiLieuAdapter extends BaseAdapter {
                 intent.putExtra("CATEGORY", category);
                 intent.putExtra("COUNT", count);
                 intent.putExtra("STATUS", status);
+                intent.putExtra("AUTHOR", author);
+                intent.putExtra("DESCRIBE", describe);
                 intent.putExtra("IMAGE_PATH", imagePath);
                 intent.putExtra("ITEM_ID", itemId);
                 context.startActivity(intent);

@@ -8,7 +8,7 @@
         android:layout_height="70dp"
         android:textColor="@color/black"
         android:background="@color/purpose"
-        android:text="Danh sách tài liệu"
+        android:text="Tài liệu yêu thích"
         android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold"
