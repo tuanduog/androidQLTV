@@ -96,12 +96,11 @@ public class TaiLieuAdapter_us extends BaseAdapter {
 
             Button btnThemYT = convertView.findViewById(R.id.btnThemYeuThich);
             btnThemYT.setOnClickListener(v -> {
-                long userId = 1; // ID người dùng hiện tại
+                String userId = context.getSharedPreferences("UserPref", Context.MODE_PRIVATE).getString("USERID", null);
                 String ngayThem = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
                 SQLiteDatabase database = context.openOrCreateDatabase("mydatabase.db", Context.MODE_PRIVATE, null);
 
                 try {
-                    String userId= DanhSachTaiLieu.UserID1;
                     // Kiểm tra xem tài liệu đã có trong danh sách yêu thích chưa
                     String checkQuery = "SELECT COUNT(*) FROM DANHSACHYEUTHICH WHERE USERID = ? AND TAILIEUID = ?";
                     Cursor checkCursor = database.rawQuery(checkQuery, new String[]{String.valueOf(userId), String.valueOf(itemId)});

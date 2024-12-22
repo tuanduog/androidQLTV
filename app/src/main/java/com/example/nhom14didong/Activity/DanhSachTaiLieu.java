@@ -18,7 +18,6 @@ public class DanhSachTaiLieu extends AppCompatActivity {
     private ListView listView;
     private TaiLieuAdapter_us adapter;
     private SQLiteDatabase database;
-    public String userID = getSharedPreferences("UserPref", MODE_PRIVATE).getString("USERID", null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
