@@ -3,6 +3,7 @@ package com.example.nhom14didong.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -98,6 +99,7 @@ public class QuanLyMuonTra extends AppCompatActivity {
                     list.clear();
                     list.addAll(searchPhieuMuon(keyword, tinhTrang, ngayTra, database));
                     adapter.notifyDataSetChanged();
+                    listView.setAdapter(adapter);
                     if (list.isEmpty()) {
                         Toast.makeText(QuanLyMuonTra.this, "Không tìm thấy kết quả phù hợp", Toast.LENGTH_SHORT).show();
                     }
@@ -108,8 +110,9 @@ public class QuanLyMuonTra extends AppCompatActivity {
         });
     }
 
+
     // Hàm đọc dữ liệu từ database
-    private void readData(String tinhTrang) {
+    public void readData(String tinhTrang) {
         String query = "SELECT PHIEUMUONID,USERID, TAILIEUID, NGAYMUON, " +
                 "NGAYHENTRA, NGAYTRA, TINHTRANG, " +
                 "GHICHU, NGAYTAO FROM PHIEUMUON " +
@@ -136,6 +139,7 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 list.add(new PhieuMuon(phieuMuonID, userID, taiLieuID, ngayMuon, ngayHenTra, ngayTraReal, tinhTrangPM, ghiChu, ngayTao));
             }
             adapter.notifyDataSetChanged();
+            listView.setAdapter(adapter);
             cursor.close();
         }
         if (list.isEmpty()) {
@@ -155,20 +159,25 @@ public class QuanLyMuonTra extends AppCompatActivity {
     // Hàm tìm kiếm phiếu mượn
     private ArrayList<PhieuMuon> searchPhieuMuon(String keyword, String tinhTrang, String ngayTra, SQLiteDatabase database) {
         ArrayList<PhieuMuon> resultList = new ArrayList<>();
-        Cursor cursor = null;
+        String query = "SELECT PHIEUMUON.PHIEUMUONID, PHIEUMUON.USERID, PHIEUMUON.TAILIEUID, " +
+                "PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA, PHIEUMUON.NGAYTRA, PHIEUMUON.TINHTRANG, PHIEUMUON.GHICHU, " +
+                "PHIEUMUON.NGAYTAO, NGUOIDUNG.FULLNAME AS USER_FULLNAME, TAILIEU.TENTAILIEU AS DOCUMENT_NAME " +
+                "FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID = TAILIEU.TAILIEUID " +
+                "INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID = NGUOIDUNG.USERID " +
+                "WHERE PHIEUMUON.TINHTRANG = ? " +
+                "AND (CAST(PHIEUMUON.PHIEUMUONID AS TEXT) LIKE ? OR " +
+                "CAST(PHIEUMUON.USERID AS TEXT) LIKE ? OR " +
+                "NGUOIDUNG.FULLNAME LIKE ? OR " +
+                "TAILIEU.TENTAILIEU LIKE ?) ";
 
-        try {
-            String query = "SELECT PHIEUMUONID, PHIEUMUON.USERID, PHIEUMUON.TAILIEUID, NGAYMUON, NGAYHENTRA, NGAYTRA, PHIEUMUON.TINHTRANG, GHICHU, PHIEUMUON.NGAYTAO " +
-                    "FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID " +
-                    "WHERE PHIEUMUON.TINHTRANG = ? AND (PHIEUMUONID LIKE ? OR PHIEUMUON.USERID LIKE ?  OR NGUOIDUNG.FULLNAME LIKE ? OR TAILIEU.TENTAILIEU LIKE ?)";
-            String searchKeyword = "%" + keyword + "%";
+        String searchKeyword = "%" + keyword + "%";
+        if (ngayTra != null) {
+            query += " AND NGAYTRA IS NOT NULL";
+        } else {
+            query += " AND NGAYTRA IS NULL";
+        }
 
-            if (ngayTra == null) {
-                query += " AND NGAYTRA IS NULL";
-            } else {
-                query += " AND NGAYTRA IS NOT NULL";
-            }
-            cursor = database.rawQuery(query, new String[]{tinhTrang, searchKeyword, searchKeyword, searchKeyword, searchKeyword});
+        try (Cursor cursor = database.rawQuery(query, new String[]{tinhTrang, searchKeyword, searchKeyword, searchKeyword, searchKeyword})) {
             while (cursor.moveToNext()) {
                 int phieuMuonID = cursor.getInt(0);
                 int userID = cursor.getInt(1);
@@ -181,12 +190,11 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 String ngayTao = cursor.getString(8);
                 resultList.add(new PhieuMuon(phieuMuonID, userID, taiLieuID, ngayMuon, ngayHenTra, ngayTraReal, tinhTrangPM, ghiChu, ngayTao));
             }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+        } catch (Exception e) {
+            Log.e("DB Error", "Error during search: " + e.getMessage());
         }
 
         return resultList;
     }
+
 }

@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nhom14didong.Activity.DsPhieuMuon;
+import com.example.nhom14didong.Activity.QuanLyMuonTra;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
 
@@ -128,10 +130,15 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         String updateQuery = "UPDATE PHIEUMUON SET TINHTRANG = 'Đã xóa' WHERE PHIEUMUONID = ?";
                                         database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
                                         Toast.makeText(context, "Phiếu mượn đã bị xóa", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
+                                        if (context instanceof QuanLyMuonTra) {
+                                            String tinhTrang="Đã xác nhận";
+                                            ((QuanLyMuonTra) context).readData(tinhTrang);
+                                        }
                                     }
                                 })
                                 .setNegativeButton("Không", null);
@@ -147,10 +154,15 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         String updateQuery = "UPDATE PHIEUMUON SET NGAYTRA = CURRENT_TIMESTAMP WHERE PHIEUMUONID = ?";
                                         database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
                                         Toast.makeText(context, "Xác nhận trả thành công", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
+                                        if (context instanceof QuanLyMuonTra) {
+                                            String tinhTrang="Đã xác nhận";
+                                            ((QuanLyMuonTra) context).readData(tinhTrang);
+                                        }
                                     }
                                 })
                                 .setNegativeButton("Không", null);
@@ -187,6 +199,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         // Lấy dữ liệu người dùng sửa
+
                                         String ngayMuonMoi = edtNgayMuon.getText().toString();
                                         String ngayHenTraMoi = edtNgayHenTra.getText().toString();
 
@@ -197,6 +210,11 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                         txtNgayHenTra.setText(ngayHenTraMoi);
                                         Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
+                                        if (context instanceof QuanLyMuonTra) {
+                                            String tinhTrang="Đã xác nhận";
+                                            ((QuanLyMuonTra) context).readData(tinhTrang);
+                                        }
+
                                     }
                                 })
                                 .setNegativeButton("Hủy", null);
@@ -224,7 +242,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                 " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA , PHIEUMUON.NGAYTRA FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
                                 "INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID WHERE PHIEUMUON.PHIEUMUONID = ? ",new String[]{String.valueOf(pm.phieuMuonID)});
                 if (cursor.moveToFirst()) {
-                    String phieuMuonID = cursor.getString(0);
+//                    String phieuMuonID = cursor.getString(0);
                     String tenSach = cursor.getString(1);
                     String tenNguoiMuon = cursor.getString(2);
                     String ngayMuon = cursor.getString(3);
@@ -248,6 +266,10 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                         database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
                                         Toast.makeText(context, "Phiếu mượn đã bị xóa", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
+                                        if (context instanceof QuanLyMuonTra) {
+                                            String tinhTrang="Đã xác nhận";
+                                            ((QuanLyMuonTra) context).readData(tinhTrang);
+                                        }
                                     }
                                 })
                                 .setNegativeButton("Không", null);

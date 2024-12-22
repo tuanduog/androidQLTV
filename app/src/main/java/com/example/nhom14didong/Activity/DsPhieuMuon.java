@@ -13,6 +13,7 @@ import com.example.nhom14didong.Database.Database;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
 import com.example.nhom14didong.adapter.PhieuMuonAdapter;
+import com.example.nhom14didong.adapter.TaiLieuAdapter_us;
 
 import java.util.ArrayList;
 
@@ -60,8 +61,7 @@ public class DsPhieuMuon extends AppCompatActivity {
         adapter.setTinhTrang(tinhTrang);
         readData(tinhTrang);
     }
-
-    private void readData(String tinhTrang) {
+    public void readData(String tinhTrang) {
         Cursor cursor = database.rawQuery(
                 "SELECT PHIEUMUONID, USERID, TAILIEUID, NGAYMUON, NGAYHENTRA, NGAYTRA, TINHTRANG, GHICHU, NGAYTAO " +
                         "FROM PHIEUMUON WHERE TINHTRANG = ?", new String[]{tinhTrang});
@@ -81,10 +81,12 @@ public class DsPhieuMuon extends AppCompatActivity {
         }
 
         adapter.notifyDataSetChanged();
+        listView.setAdapter(adapter);
         if (list.isEmpty()) {
             Toast.makeText(this, "Danh sách phiếu mượn trống", Toast.LENGTH_SHORT).show();
         }
         cursor.close();
+
     }
 
     private void setupButtonStyles(Button selected, Button unselected) {

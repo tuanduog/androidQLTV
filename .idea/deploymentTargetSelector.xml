@@ -11,13 +11,13 @@
       <SelectionState runConfigName="dsphieumuon">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="TimKiem">
+      <SelectionState runConfigName="DsPhieuMuon">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="Start">
+      <SelectionState runConfigName="DanhSachTaiLieu">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="QuanLyTaiLieu">
+      <SelectionState runConfigName="ThemSach">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nhom14didong.Activity.DsPhieuMuon;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
 
@@ -158,6 +159,10 @@ public class PhieuMuonAdapter extends BaseAdapter {
                     database.execSQL(updateQuery, new Object[]{newStatus, phieuMuonID});
                     Toast.makeText(context, "Phiếu mượn đã được " + action.toLowerCase(), Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
+
+                    if (context instanceof DsPhieuMuon) {
+                        ((DsPhieuMuon) context).readData(tinhTrang);
+                    }
                 })
                 .setNegativeButton("Không", null)
                 .create()

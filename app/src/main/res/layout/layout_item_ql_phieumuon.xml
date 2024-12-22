@@ -37,39 +37,82 @@
                 android:id="@+id/txtTenSachPM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tên sách"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:paddingBottom="8dp"
                 android:ellipsize="end"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:paddingBottom="8dp"
+                android:text="Tên sách"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtNguoiMuonPM"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Người mượn: Nguyễn Văn A"
-                android:textSize="16sp"
-                android:textColor="@color/dark_gray"
-                android:paddingBottom="6dp" />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Người mượn: "
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_gray"
+                    android:paddingBottom="6dp" />
 
-            <TextView
-                android:id="@+id/txtNgayMuonPM"
+                <TextView
+                    android:id="@+id/txtNguoiMuonPM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nguyễn Văn A"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_gray"
+                    android:paddingBottom="6dp" />
+
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày mượn: 01/12/2024"
-                android:textSize="16sp"
-                android:textColor="@color/dark_gray"
-                android:paddingBottom="6dp" />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày mượn: "
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_gray"
+                    android:paddingBottom="6dp" />
 
-            <TextView
-                android:id="@+id/txtNgayHenTraPM"
+                <TextView
+                    android:id="@+id/txtNgayMuonPM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01/12/2024"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_gray"
+                    android:paddingBottom="6dp" />
+
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày hẹn trả: 10/12/2024"
-                android:textSize="16sp"
-                android:textColor="@color/dark_gray" />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày hẹn trả: "
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_gray"
+                    android:paddingBottom="6dp" />
+                <TextView
+                    android:id="@+id/txtNgayHenTraPM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10/12/2024"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark_gray" />
+
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
     </LinearLayout>
 
