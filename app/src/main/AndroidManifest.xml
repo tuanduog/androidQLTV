@@ -16,9 +16,6 @@
             android:name=".Activity.ChiTietTaiLieu"
             android:exported="true" />
         <activity
-            android:name=".Activity.Start"
-            android:exported="true" />
-        <activity
             android:name=".Activity.XemThongKe"
             android:exported="true" />
         <activity
@@ -64,7 +61,7 @@
             android:name=".Activity.DanhSachTaiLieu"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.Start"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

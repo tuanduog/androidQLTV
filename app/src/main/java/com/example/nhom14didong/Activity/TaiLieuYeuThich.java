@@ -29,7 +29,7 @@ public class TaiLieuYeuThich extends AppCompatActivity {
 
     public void loadDataFromDatabase() {
         String userId = getSharedPreferences("UserPref", MODE_PRIVATE).getString("USERID", null);
-        String query = "SELECT TAILIEU.TENTAILIEU, TAILIEU.THELOAI, TAILIEU.SOLUONG, TAILIEU.TINHTRANG, TAILIEU.IMAGE " +
+        String query = "SELECT TAILIEU.TAILIEUID, TAILIEU.TENTAILIEU, TAILIEU.THELOAI, TAILIEU.SOLUONG, TAILIEU.TINHTRANG, TAILIEU.IMAGE " +
                 "FROM DANHSACHYEUTHICH " +
                 "INNER JOIN TAILIEU ON DANHSACHYEUTHICH.TAILIEUID = TAILIEU.TAILIEUID " +
                 "WHERE DANHSACHYEUTHICH.USERID = ?";

@@ -21,7 +21,9 @@ import com.bumptech.glide.Glide;
 import com.example.nhom14didong.R;
 
 import java.io.ByteArrayInputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ChiTietTaiLieu extends AppCompatActivity {
 
@@ -96,17 +98,16 @@ public class ChiTietTaiLieu extends AppCompatActivity {
             if (imagePath != null && !imagePath.isEmpty()) {
                 int resId = ChiTietTaiLieu.this.getResources().getIdentifier(imagePath, "drawable", ChiTietTaiLieu.this.getPackageName());
                 if (resId != 0) {
-                    // Load image using Glide
                     Glide.with(ChiTietTaiLieu.this)
-                            .load(resId) // Load resource by ID
-                            .placeholder(R.drawable.book_img) // Placeholder while loading
-                            .error(R.drawable.book_img) // Error image if loading fails
+                            .load(resId)
+                            .placeholder(R.drawable.book_img)
+                            .error(R.drawable.book_img)
                             .into(image);
                 } else {
-                    image.setImageResource(R.drawable.book_img); // Fallback image
+                    image.setImageResource(R.drawable.book_img);
                 }
             } else {
-                image.setImageResource(R.drawable.book_img); // Fallback image when no image path is found
+                image.setImageResource(R.drawable.book_img);
             }
             // Hiển thị thông tin tài liệu
             txtTenSach.setText(tenTaiLieu);
@@ -141,7 +142,7 @@ public class ChiTietTaiLieu extends AppCompatActivity {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     this,
                     (view, year, month, dayOfMonth) -> {
-                        String selectedDate = String.format("%d-%02d-%02d", year, month + 1, dayOfMonth);
+                        String selectedDate = String.format("%d/%02d/%02d", year, month + 1, dayOfMonth);
                         edtNgayHenTra.setText(selectedDate);
                     },
                     calendar.get(Calendar.YEAR),
@@ -178,8 +179,10 @@ public class ChiTietTaiLieu extends AppCompatActivity {
         try {
             String userID = getSharedPreferences("UserPref", MODE_PRIVATE).getString("USERID", null);
             String tinhTrang = "Chưa xác nhận";
-            String query = "INSERT INTO PHIEUMUON (USERID, TAILIEUID, NGAYMUON, NGAYHENTRA, TINHTRANG, GHICHU) VALUES (?, ?, ?, ?, ?)";
-            long ngayMuon = System.currentTimeMillis();
+            String query = "INSERT INTO PHIEUMUON (USERID, TAILIEUID, NGAYMUON, NGAYHENTRA, TINHTRANG, GHICHU) VALUES (?, ?, ?, ?, ?,?)";
+            long ngayMuonInt = System.currentTimeMillis();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String ngayMuon = sdf.format(new Date(ngayMuonInt));
 
             database.execSQL(query, new Object[]{userID,taiLieuId, ngayMuon, ngayHenTra, tinhTrang, ghiChu});
             Toast.makeText(this, "Đã thêm vào phiếu mượn!", Toast.LENGTH_SHORT).show();
