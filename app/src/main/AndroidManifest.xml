@@ -58,6 +58,9 @@
             android:name=".Activity.SuaSach"
             android:exported="true" />
         <activity
+            android:name=".Activity.TaiLieuYeuThich"
+            android:exported="true" />
+        <activity
             android:name=".Activity.DanhSachTaiLieu"
             android:exported="true" />
         <activity

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.nhom14didong.Activity.DsPhieuMuon;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
@@ -126,10 +127,23 @@ public class PhieuMuonAdapter extends BaseAdapter {
             holder.txtTenSach.setText(cursor.getString(0));
             holder.txtTheLoai.setText(cursor.getString(1));
 
-            byte[] imageBytes = cursor.getBlob(2);
-            if (imageBytes != null) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                holder.imgSachMuon.setImageBitmap(bitmap);
+            String imagePath = cursor.getString(2); // IMAGE
+            ImageView bookImageView = holder.imgSachMuon; // Changed to use imgSachMuon
+
+            // Load image using Glide
+            if (imagePath != null && !imagePath.isEmpty()) {
+                int resId = context.getResources().getIdentifier(imagePath, "drawable", context.getPackageName());
+                if (resId != 0) {
+                    Glide.with(context)
+                            .load(resId) // Load resource by ID
+                            .placeholder(R.drawable.book_img)
+                            .error(R.drawable.book_img)
+                            .into(bookImageView);
+                } else {
+                    bookImageView.setImageResource(R.drawable.book_img); // Fallback image
+                }
+            } else {
+                bookImageView.setImageResource(R.drawable.book_img);
             }
 
             holder.txtNguoiMuon.setText( cursor.getString(3));

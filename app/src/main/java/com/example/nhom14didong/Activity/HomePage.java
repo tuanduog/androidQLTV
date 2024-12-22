@@ -12,7 +12,7 @@ import com.example.nhom14didong.R;
 
 public class HomePage extends AppCompatActivity {
     ImageButton imgbtnDSTL, imgbtnTimKiem, imgbtnDSPM, imgbtnProfile, imgbtnTimKiem2, imgbtnDSTL2
-            , imgbtnDSPM2;
+            , imgbtnDSPM2, imgbtnDSYT;
     FrameLayout flDSTaiLieu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class HomePage extends AppCompatActivity {
         imgbtnTimKiem2 = findViewById(R.id.imgbtnTimKiem2);
         imgbtnDSTL2 = findViewById(R.id.imgbtnDSTL2);
         imgbtnDSPM2 = findViewById(R.id.imgbtnDSPM2);
+        imgbtnDSYT = findViewById(R.id.imgbtnDSYT);
 
         imgbtnDSTL.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, DanhSachTaiLieu.class);
@@ -53,6 +54,10 @@ public class HomePage extends AppCompatActivity {
         });
         imgbtnDSTL2.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, DanhSachTaiLieu.class);
+            startActivity(intent);
+        });
+        imgbtnDSYT.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, TaiLieuYeuThich.class);
             startActivity(intent);
         });
         imgbtnDSPM2.setOnClickListener(v -> {

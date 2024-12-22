@@ -14,9 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
+
 import com.bumptech.glide.Glide;
 import com.example.nhom14didong.Activity.ChiTietTaiLieu;
 import com.example.nhom14didong.Activity.DanhSachTaiLieu;
+import com.example.nhom14didong.Activity.TaiLieuYeuThich;
 import com.example.nhom14didong.R;
 
 import java.text.SimpleDateFormat;
@@ -73,6 +76,7 @@ public class TaiLieuAdapter_us extends BaseAdapter {
             int imagePathIndex = cursor.getColumnIndex("IMAGE");
             int itemIdIndex = cursor.getColumnIndex("TAILIEUID");
 
+
             // Fetch the data from the cursor
             String bookName = (bookNameIndex != -1) ? cursor.getString(bookNameIndex) : "Unknown Book Name";
             String category = (categoryIndex != -1) ? cursor.getString(categoryIndex) : "Unknown Category";
@@ -96,23 +100,25 @@ public class TaiLieuAdapter_us extends BaseAdapter {
 
             Button btnThemYT = convertView.findViewById(R.id.btnThemYeuThich);
             btnThemYT.setOnClickListener(v -> {
-                long userId = 1; // ID người dùng hiện tại
+                String userId = context.getSharedPreferences("UserPref", Context.MODE_PRIVATE).getString("USERID", null);
                 String ngayThem = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
                 SQLiteDatabase database = context.openOrCreateDatabase("mydatabase.db", Context.MODE_PRIVATE, null);
 
                 try {
-                    String userId= DanhSachTaiLieu.UserID1;
                     // Kiểm tra xem tài liệu đã có trong danh sách yêu thích chưa
                     String checkQuery = "SELECT COUNT(*) FROM DANHSACHYEUTHICH WHERE USERID = ? AND TAILIEUID = ?";
                     Cursor checkCursor = database.rawQuery(checkQuery, new String[]{String.valueOf(userId), String.valueOf(itemId)});
                     if (checkCursor.moveToFirst() && checkCursor.getInt(0) > 0) {
-                        // Tài liệu đã tồn tại trong danh sách yêu thích
                         Toast.makeText(context, bookName + " đã có trong danh sách yêu thích!", Toast.LENGTH_SHORT).show();
                     } else {
-                        // Thêm tài liệu vào danh sách yêu thích
                         String insertQuery = "INSERT INTO DANHSACHYEUTHICH (USERID, TAILIEUID, NGAYTHEM) VALUES (?, ?, ?)";
                         database.execSQL(insertQuery, new Object[]{userId, itemId, ngayThem});
                         Toast.makeText(context, "Đã thêm " + bookName + " vào yêu thích!", Toast.LENGTH_SHORT).show();
+
+                        // Cập nhật danh sách yêu thích sau khi thêm
+                        if (context instanceof TaiLieuYeuThich) {
+                            ((TaiLieuYeuThich) context).loadDataFromDatabase();
+                        }
                     }
                     checkCursor.close();
                 } catch (Exception e) {
@@ -122,7 +128,7 @@ public class TaiLieuAdapter_us extends BaseAdapter {
                     database.close();
                 }
             });
-
+            CardView cardView = convertView.findViewById(R.id.cart_view);
             // ImageView setup: Load image from path (Glide)
             ImageView bookImageView = convertView.findViewById(R.id.book_image);
             if (imagePath != null && !imagePath.isEmpty()) {
@@ -141,7 +147,7 @@ public class TaiLieuAdapter_us extends BaseAdapter {
             }
 
             // Add click listener with delay
-            bookImageView.setOnClickListener(v -> {
+            cardView.setOnClickListener(v -> {
                 new Handler().postDelayed(() -> {
                     Intent intent = new Intent(context, ChiTietTaiLieu.class);
                     intent.putExtra("TAILIEUID", itemId);

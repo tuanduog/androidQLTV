@@ -1,8 +1,10 @@
 package com.example.nhom14didong.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
+
 import com.bumptech.glide.Glide;
+import com.example.nhom14didong.Activity.ChiTietTaiLieu;
 import com.example.nhom14didong.R;
 
 import java.text.SimpleDateFormat;
@@ -56,7 +61,7 @@ public class YeuThichAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.activity_chi_tiet_tai_lieu, parent, false);
+            convertView = inflater.inflate(R.layout.activity_tailieu2, parent, false);
         }
 
         if (cursor.moveToPosition(position)) {
@@ -89,6 +94,7 @@ public class YeuThichAdapter extends BaseAdapter {
 
             TextView bookStatusView = convertView.findViewById(R.id.book_status);
             bookStatusView.setText(status);
+            CardView cardView = convertView.findViewById(R.id.cart_view);
             // ImageView setup: Load image from path (Glide)
             ImageView bookImageView = convertView.findViewById(R.id.book_image);
             if (imagePath != null && !imagePath.isEmpty()) {
@@ -105,7 +111,13 @@ public class YeuThichAdapter extends BaseAdapter {
             } else {
                 bookImageView.setImageResource(R.drawable.book_img);
             }
-
+            cardView.setOnClickListener(v -> {
+                new Handler().postDelayed(() -> {
+                    Intent intent = new Intent(context, ChiTietTaiLieu.class);
+                    intent.putExtra("TAILIEUID", itemId);
+                    context.startActivity(intent);
+                }, 500); // Delay 0.5 seconds
+            });
         }
         return convertView;
     }
