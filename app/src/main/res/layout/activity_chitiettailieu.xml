@@ -98,5 +98,4 @@
             android:layout_height="wrap_content"
             android:text="Thêm vào phiếu mượn"/>
     </LinearLayout>
-    
 </LinearLayout>

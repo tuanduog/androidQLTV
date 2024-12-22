@@ -14,9 +14,11 @@ import com.example.nhom14didong.adapter.TaiLieuAdapter;
 import com.example.nhom14didong.adapter.TaiLieuAdapter_us;
 
 public class DanhSachTaiLieu extends AppCompatActivity {
+
     private ListView listView;
     private TaiLieuAdapter_us adapter;
     private SQLiteDatabase database;
+    public String userID = getSharedPreferences("UserPref", MODE_PRIVATE).getString("USERID", null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,6 @@ public class DanhSachTaiLieu extends AppCompatActivity {
     }
 
     private void loadDataFromDatabase() {
-
         String query = "SELECT * FROM TAILIEU";
         Cursor cursor = database.rawQuery(query, null);
         adapter = new TaiLieuAdapter_us(this, cursor);
