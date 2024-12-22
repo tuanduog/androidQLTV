@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.nhom14didong.R;
 
 import java.io.ByteArrayInputStream;
@@ -73,23 +74,47 @@ public class ChiTietTaiLieu extends AppCompatActivity {
         Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(taiLieuId)});
 
         if (cursor.moveToFirst()) {
-            // Load hình ảnh từ cột IMAGE (giả sử cột IMAGE lưu trữ ảnh dạng blob)
-            byte[] imageBytes = cursor.getBlob(cursor.getColumnIndex("IMAGE"));
-            if (imageBytes != null) {
-                ByteArrayInputStream imageStream = new ByteArrayInputStream(imageBytes);
-                Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
-                image.setImageBitmap(bitmap);
-            } else {
-                image.setImageResource(R.drawable.book_img); // Hình mặc định
-            }
+            // lấy dl từ db
+            int tenTaiLieuIndex = cursor.getColumnIndex("TENTAILIEU");
+            int theLoaiIndex = cursor.getColumnIndex("THELOAI");
+            int tacGiaIndex = cursor.getColumnIndex("TACGIA");
+            int soLuongIndex = cursor.getColumnIndex("SOLUONG");
+            int moTaIndex = cursor.getColumnIndex("MOTA");
+            int trangThaiIndex = cursor.getColumnIndex("TINHTRANG");
 
+            // xét dư liệu
+            String tenTaiLieu = (tenTaiLieuIndex != -1) ? cursor.getString(tenTaiLieuIndex) : "Unknown";
+            String theLoai = (theLoaiIndex != -1) ? cursor.getString(theLoaiIndex) : "Unknown";
+            String tacGia = (tacGiaIndex != -1) ? cursor.getString(tacGiaIndex) : "Unknown";
+            int soLuong = (soLuongIndex != -1) ? cursor.getInt(soLuongIndex) : 0;
+            String moTa = (moTaIndex != -1) ? cursor.getString(moTaIndex) : "No description available";
+            String trangThai = (trangThaiIndex != -1) ? cursor.getString(trangThaiIndex) : "Unknown";
+            int imagePathIndex = cursor.getColumnIndex("IMAGE");
+            String imagePath = (imagePathIndex != -1) ? cursor.getString(imagePathIndex) : "";
+
+            // Check if imagePath is valid and not empty
+            if (imagePath != null && !imagePath.isEmpty()) {
+                int resId = ChiTietTaiLieu.this.getResources().getIdentifier(imagePath, "drawable", ChiTietTaiLieu.this.getPackageName());
+                if (resId != 0) {
+                    // Load image using Glide
+                    Glide.with(ChiTietTaiLieu.this)
+                            .load(resId) // Load resource by ID
+                            .placeholder(R.drawable.book_img) // Placeholder while loading
+                            .error(R.drawable.book_img) // Error image if loading fails
+                            .into(image);
+                } else {
+                    image.setImageResource(R.drawable.book_img); // Fallback image
+                }
+            } else {
+                image.setImageResource(R.drawable.book_img); // Fallback image when no image path is found
+            }
             // Hiển thị thông tin tài liệu
-            txtTenSach.setText(cursor.getString(cursor.getColumnIndex("TENTAILIEU")));
-            txtLoaiSach.setText(cursor.getString(cursor.getColumnIndex("THELOAI")));
-            txtTacGia.setText(cursor.getString(cursor.getColumnIndex("TACGIA")));
-            txtSoLuong.setText(String.valueOf(cursor.getInt(cursor.getColumnIndex("SOLUONG"))));
-            txtMoTa.setText(cursor.getString(cursor.getColumnIndex("MOTA")));
-            txtTrangThai.setText(cursor.getString(cursor.getColumnIndex("TINHTRANG")));
+            txtTenSach.setText(tenTaiLieu);
+            txtLoaiSach.setText(theLoai);
+            txtTacGia.setText(tacGia);
+            txtSoLuong.setText(String.valueOf(soLuong));
+            txtMoTa.setText(moTa);
+            txtTrangThai.setText(trangThai);
         } else {
             Toast.makeText(this, "Không tìm thấy tài liệu!", Toast.LENGTH_SHORT).show();
         }

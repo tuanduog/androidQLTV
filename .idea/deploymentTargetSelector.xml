@@ -5,6 +5,9 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+<<<<<<< HEAD
+      <SelectionState runConfigName="Admin_Homepage">
+=======
       <SelectionState runConfigName="DsPhieuMuon">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
@@ -12,6 +15,7 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="ChiTietTaiLieu">
+>>>>>>> c6be0905888a0300ab8976cc5ad6cd515bd2a918
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="QuanLyMuonTra">
