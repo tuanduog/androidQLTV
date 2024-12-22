@@ -15,9 +15,10 @@ import com.example.nhom14didong.Database.Database;
 import com.example.nhom14didong.R;
 
 public class SuaSach extends AppCompatActivity {
-    private EditText edtChonAnh, edtTenSach, edtLoaiSach, edtSoLuong, edtTrangthai;
+    private EditText edtChonAnh, edtTenSach, edtLoaiSach, edtSoLuong, edtTacGia, edtMoTa;
     private Button btnSua, btnHuy;
     private String currentBookName, currentCategory, currentCount, currentStatus, currentImagePath;
+    private String currentBookAuthor, currentBookDes;
     private RadioGroup rgTT;
     private RadioButton rbDangCon, rbDaHet;
     private long currentItemId;
@@ -33,6 +34,8 @@ public class SuaSach extends AppCompatActivity {
         currentCategory = getIntent().getStringExtra("CATEGORY");
         currentCount = getIntent().getStringExtra("COUNT");
         currentStatus = getIntent().getStringExtra("STATUS");
+        currentBookAuthor = getIntent().getStringExtra("AUTHOR");
+        currentBookDes = getIntent().getStringExtra("DESCRIBE");
         currentImagePath = getIntent().getStringExtra("IMAGE_PATH");
         currentItemId = getIntent().getLongExtra("ITEM_ID", -1);
 
@@ -40,6 +43,8 @@ public class SuaSach extends AppCompatActivity {
         edtTenSach = findViewById(R.id.edtTenSach);
         edtLoaiSach = findViewById(R.id.edtLoaiSach);
         edtSoLuong = findViewById(R.id.edtSoLuong);
+        edtTacGia = findViewById(R.id.edtTacGia);
+        edtMoTa = findViewById(R.id.edtMoTa);
         rgTT = findViewById(R.id.rgTT);
         rbDaHet = findViewById(R.id.rbDaHet);
         rbDangCon = findViewById(R.id.rbDangCon);
@@ -48,6 +53,8 @@ public class SuaSach extends AppCompatActivity {
         edtTenSach.setText(currentBookName);
         edtLoaiSach.setText(currentCategory);
         edtSoLuong.setText(currentCount);
+        edtMoTa.setText(currentBookDes);
+        edtTacGia.setText(currentBookAuthor);
         edtChonAnh.setText(currentImagePath);
         if ("Đang còn".equals(currentStatus)) {
             rbDangCon.setChecked(true);
@@ -63,6 +70,8 @@ public class SuaSach extends AppCompatActivity {
             String updatedBookName = edtTenSach.getText().toString();
             String updatedCategory = edtLoaiSach.getText().toString();
             String updatedCount = edtSoLuong.getText().toString();
+            String updatedAuthor = edtTacGia.getText().toString();
+            String updatedDes = edtMoTa.getText().toString();
             String updatedStatus = "";
             String updatedImagePath = edtChonAnh.getText().toString();
             if(rbDangCon.isChecked()){
@@ -93,6 +102,8 @@ public class SuaSach extends AppCompatActivity {
             values.put("TENTAILIEU", updatedBookName);
             values.put("THELOAI", updatedCategory);
             values.put("SOLUONG", updatedCount);
+            values.put("TACGIA", updatedAuthor);
+            values.put("MOTA", updatedDes);
             values.put("TINHTRANG", updatedStatus);
             values.put("IMAGE", updatedImagePath);
 

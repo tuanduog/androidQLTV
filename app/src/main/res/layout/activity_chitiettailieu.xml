@@ -5,9 +5,12 @@
     android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Thêm tài liệu"
-        android:textSize="26sp"
+        android:layout_height="60dp"
+        android:text="Chi tiết tài liệu"
+        android:background="@color/purpose"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
         android:gravity="center"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,22 +18,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chọn ảnh: "/>
-        <EditText
-            android:id="@+id/edtChonAnh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Tên sách: "/>
-        <EditText
-            android:id="@+id/edtTenSach"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtTenSach"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
@@ -40,21 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Loại sách: "/>
-        <EditText
-            android:id="@+id/edtLoaiSach"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/txtLoaiSach"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Số lượng: "/>
-        <EditText
-            android:id="@+id/edtSoLuong"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
@@ -64,9 +43,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tác giả: "/>
-        <EditText
-            android:id="@+id/edtTacGia"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtTacGia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số lượng: "/>
+        <TextView
+            android:id="@+id/txtSoLuong"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
@@ -76,52 +67,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mô tả: "/>
-        <EditText
-            android:id="@+id/edtMoTa"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtMoTa"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trạng thái: "/>
-        <RadioGroup
+        <TextView
+            android:id="@+id/txtTrangThai"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/rgTT">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đang còn"
-                android:checked="true"
-                android:id="@+id/rbDangCon"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đã hết"
-                android:id="@+id/rbDaHet"/>
-        </RadioGroup>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
         <Button
-            android:id="@+id/btnThem"
+            android:id="@+id/btnThemVaoYeuThich"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thêm"/>
+            android:text="Thêm vào yêu thích"/>
         <Button
-            android:id="@+id/btnHuy"
+            android:id="@+id/btnThemVaoPM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Hủy"/>
+            android:text="Thêm vào phiếu mượn"/>
     </LinearLayout>
 </LinearLayout>

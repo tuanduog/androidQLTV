@@ -15,6 +15,7 @@ import com.example.nhom14didong.R;
 public class ThemSach extends AppCompatActivity {
 
     private EditText edtBookImage, edtBookName, edtBookCategory, edtBookCount;
+    private EditText edtBookAuthor, edtBookDescribe;
     private SQLiteDatabase db;
     private RadioButton rbDangCon, rbDaHet;
 
@@ -28,6 +29,8 @@ public class ThemSach extends AppCompatActivity {
         edtBookName = findViewById(R.id.edtTenSach);
         edtBookCategory = findViewById(R.id.edtLoaiSach);
         edtBookCount = findViewById(R.id.edtSoLuong);
+        edtBookAuthor = findViewById(R.id.edtTacGia);
+        edtBookDescribe = findViewById(R.id.edtMoTa);
         rbDangCon = findViewById(R.id.rbDangCon);
         rbDaHet = findViewById(R.id.rbDaHet);
 
@@ -53,6 +56,8 @@ public class ThemSach extends AppCompatActivity {
         String bookName = edtBookName.getText().toString();
         String bookCategory = edtBookCategory.getText().toString();
         String bookCount = edtBookCount.getText().toString();
+        String bookAuthor = edtBookAuthor.getText().toString();
+        String bookDescribe = edtBookDescribe.getText().toString();
         String bookStatus = "";
 
         if (rbDangCon.isChecked()) {
@@ -68,7 +73,7 @@ public class ThemSach extends AppCompatActivity {
             bookStatus = "Đã hết";
         }
         // Check
-        if (bookImage.isEmpty() || bookName.isEmpty() || bookCategory.isEmpty() || bookCount.isEmpty()) {
+        if (bookImage.isEmpty() || bookName.isEmpty() || bookCategory.isEmpty() || bookCount.isEmpty() || bookAuthor.isEmpty()) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             try {
@@ -91,6 +96,8 @@ public class ThemSach extends AppCompatActivity {
             values.put("THELOAI", bookCategory);
             values.put("SOLUONG", bookCount);
             values.put("TINHTRANG", bookStatus);
+            values.put("TACGIA", bookAuthor);
+            values.put("MOTA", bookDescribe);
 
             // Thực hiện insert vào bảng "TAILIEU"
             long result = db.insert("TAILIEU", null, values);
