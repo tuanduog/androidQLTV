@@ -1,6 +1,8 @@
 package com.example.nhom14didong.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.example.nhom14didong.Activity.SuaSach;
 import com.example.nhom14didong.R;
@@ -64,17 +68,20 @@ public class TaiLieuAdapter extends BaseAdapter {
             int categoryIndex = cursor.getColumnIndex("THELOAI");
             int countIndex = cursor.getColumnIndex("SOLUONG");
             int statusIndex = cursor.getColumnIndex("TINHTRANG");
+            int describeIndex = cursor.getColumnIndex("MOTA");
+            int authorIndex = cursor.getColumnIndex("TACGIA");
             int imagePathIndex = cursor.getColumnIndex("IMAGE");
             int itemIdIndex = cursor.getColumnIndex("TAILIEUID");
 
             String bookName = (bookNameIndex != -1) ? cursor.getString(bookNameIndex) : "Unknown Book Name";
             String category = (categoryIndex != -1) ? cursor.getString(categoryIndex) : "Unknown Category";
             String count = (countIndex != -1) ? cursor.getString(countIndex) : "0";
+            String describe = (describeIndex != -1) ? cursor.getString(describeIndex) : "Unknown describe";
+            String author = (authorIndex != -1) ? cursor.getString(authorIndex) : "Unknown Author";
             String status = (statusIndex != -1) ? cursor.getString(statusIndex) : "Unknown Status";
             String imagePath = (imagePathIndex != -1) ? cursor.getString(imagePathIndex) : "";
             long itemId = (itemIdIndex != -1) ? cursor.getLong(itemIdIndex) : -1;
 
-            // Set up views
             TextView bookNameView = convertView.findViewById(R.id.book_name);
             bookNameView.setText(bookName);
 
@@ -107,43 +114,50 @@ public class TaiLieuAdapter extends BaseAdapter {
             Button btnFix = convertView.findViewById(R.id.btnFix);
             Button btnDelete = convertView.findViewById(R.id.btnDelete);
 
-            // Handle Sửa button click
+            // Suwa
             btnFix.setOnClickListener(v -> {
-                // Create intent for updating data
                 Intent intent = new Intent(context, SuaSach.class);
                 intent.putExtra("BOOK_NAME", bookName);
                 intent.putExtra("CATEGORY", category);
                 intent.putExtra("COUNT", count);
                 intent.putExtra("STATUS", status);
+                intent.putExtra("AUTHOR", author);
+                intent.putExtra("DESCRIBE", describe);
                 intent.putExtra("IMAGE_PATH", imagePath);
                 intent.putExtra("ITEM_ID", itemId);
-                // Start SuaSach activity to edit
                 context.startActivity(intent);
             });
 
-            // Handle Xóa button click
+            // Xóa
             btnDelete.setOnClickListener(v -> {
-                long itemIdToDelete = getItemId(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Bạn có chắc muốn xóa tài liệu này không?")
+                        .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                long itemIdToDelete = getItemId(position);
 
-                if (itemIdToDelete != -1) {
-                    // Get db
-                    SQLiteDatabase db = context.openOrCreateDatabase("mydatabase.db", Context.MODE_PRIVATE, null);
+                                if (itemIdToDelete != -1) {
+                                    SQLiteDatabase db = context.openOrCreateDatabase("mydatabase.db", Context.MODE_PRIVATE, null);
 
-                    String whereClause = "TAILIEUID = ?";
-                    String[] whereArgs = {String.valueOf(itemIdToDelete)};
+                                    String whereClause = "TAILIEUID = ?";
+                                    String[] whereArgs = {String.valueOf(itemIdToDelete)};
 
-                    // Delete from db
-                    int rowsDeleted = db.delete("TAILIEU", whereClause, whereArgs);
+                                    int rowsDeleted = db.delete("TAILIEU", whereClause, whereArgs);
 
-                    // Check delete
-                    if (rowsDeleted > 0) {
-                        // Refresh the cursor data and update the adapter
-                        cursor.requery();
-                        notifyDataSetChanged();
-                    }
-
-                    db.close();
-                }
+                                    // Check delete
+                                    if (rowsDeleted > 0) {
+                                        cursor.requery();
+                                        notifyDataSetChanged();
+                                    }
+                                    Toast.makeText(context, "Xóa tài liệu thành công", Toast.LENGTH_SHORT).show();
+                                    db.close();
+                                }
+                                notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("Không", null);
+                builder.create().show();
             });
         }
 

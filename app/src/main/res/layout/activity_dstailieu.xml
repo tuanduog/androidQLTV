@@ -6,9 +6,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:textColor="@color/black"
+        android:background="@color/purpose"
         android:text="Danh sách tài liệu"
         android:textAlignment="center"
-        android:textSize="27sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:gravity="center" />
     <View
