@@ -53,16 +53,6 @@ public class QuanLyTaiLieu extends AppCompatActivity {
         loadDataFromDatabase(); // Tải lại dữ liệu khi quay lại màn hình
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (adapter != null && adapter.getCursor() != null) {
-//            adapter.getCursor().close();
-//        }
-//        if (database != null) {
-//            database.close();
-//        }
-//    }
 }
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,16 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.nhom14didong.Activity.SuaSach;
+import com.example.nhom14didong.Activity.ChiTietTaiLieu;
+import com.example.nhom14didong.Activity.DanhSachTaiLieu;
 import com.example.nhom14didong.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class TaiLieuAdapter_us extends BaseAdapter {
     private Context context;
@@ -87,6 +94,35 @@ public class TaiLieuAdapter_us extends BaseAdapter {
             TextView bookStatusView = convertView.findViewById(R.id.book_status);
             bookStatusView.setText(status);
 
+            Button btnThemYT = convertView.findViewById(R.id.btnThemYeuThich);
+            btnThemYT.setOnClickListener(v -> {
+                long userId = 1; // ID người dùng hiện tại
+                String ngayThem = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+                SQLiteDatabase database = context.openOrCreateDatabase("mydatabase.db", Context.MODE_PRIVATE, null);
+
+                try {
+                    String userId= DanhSachTaiLieu.UserID1;
+                    // Kiểm tra xem tài liệu đã có trong danh sách yêu thích chưa
+                    String checkQuery = "SELECT COUNT(*) FROM DANHSACHYEUTHICH WHERE USERID = ? AND TAILIEUID = ?";
+                    Cursor checkCursor = database.rawQuery(checkQuery, new String[]{String.valueOf(userId), String.valueOf(itemId)});
+                    if (checkCursor.moveToFirst() && checkCursor.getInt(0) > 0) {
+                        // Tài liệu đã tồn tại trong danh sách yêu thích
+                        Toast.makeText(context, bookName + " đã có trong danh sách yêu thích!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Thêm tài liệu vào danh sách yêu thích
+                        String insertQuery = "INSERT INTO DANHSACHYEUTHICH (USERID, TAILIEUID, NGAYTHEM) VALUES (?, ?, ?)";
+                        database.execSQL(insertQuery, new Object[]{userId, itemId, ngayThem});
+                        Toast.makeText(context, "Đã thêm " + bookName + " vào yêu thích!", Toast.LENGTH_SHORT).show();
+                    }
+                    checkCursor.close();
+                } catch (Exception e) {
+                    Toast.makeText(context, "Lỗi: Không thể thêm vào yêu thích!", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                } finally {
+                    database.close();
+                }
+            });
+
             // ImageView setup: Load image from path (Glide)
             ImageView bookImageView = convertView.findViewById(R.id.book_image);
             if (imagePath != null && !imagePath.isEmpty()) {
@@ -104,6 +140,14 @@ public class TaiLieuAdapter_us extends BaseAdapter {
                 bookImageView.setImageResource(R.drawable.book_img);
             }
 
+            // Add click listener with delay
+            bookImageView.setOnClickListener(v -> {
+                new Handler().postDelayed(() -> {
+                    Intent intent = new Intent(context, ChiTietTaiLieu.class);
+                    intent.putExtra("TAILIEUID", itemId);
+                    context.startActivity(intent);
+                }, 500); // Delay 0.5 giay
+            });
         }
         return convertView;
     }

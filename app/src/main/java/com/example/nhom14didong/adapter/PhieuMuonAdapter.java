@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nhom14didong.Activity.DsPhieuMuon;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
 
@@ -131,9 +132,9 @@ public class PhieuMuonAdapter extends BaseAdapter {
                 holder.imgSachMuon.setImageBitmap(bitmap);
             }
 
-            holder.txtNguoiMuon.setText("Người mượn: " + cursor.getString(3));
-            holder.txtThoiGianMuon.setText("Ngày mượn: " + cursor.getString(4));
-            holder.txtThoiGianTra.setText("Ngày hẹn trả: " + cursor.getString(5));
+            holder.txtNguoiMuon.setText( cursor.getString(3));
+            holder.txtThoiGianMuon.setText( cursor.getString(4));
+            holder.txtThoiGianTra.setText( cursor.getString(5));
         }
 
         if (cursor != null) {
@@ -158,6 +159,10 @@ public class PhieuMuonAdapter extends BaseAdapter {
                     database.execSQL(updateQuery, new Object[]{newStatus, phieuMuonID});
                     Toast.makeText(context, "Phiếu mượn đã được " + action.toLowerCase(), Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
+
+                    if (context instanceof DsPhieuMuon) {
+                        ((DsPhieuMuon) context).readData(tinhTrang);
+                    }
                 })
                 .setNegativeButton("Không", null)
                 .create()
