@@ -11,13 +11,13 @@
       <SelectionState runConfigName="DanhSachTaiLieu">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="Admin_Homepage">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="ChiTietTaiLieu">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="QuanLyMuonTra">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="QuanLyTaiLieu">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
