@@ -97,23 +97,23 @@ public class PhieuMuonAdapter extends BaseAdapter {
     }
 
     private void setupChuaXacNhanView(ViewHolder holder, View view) {
-        holder.imgSachMuon = view.findViewById(R.id.imgSachMuon);
-        holder.txtTenSach = view.findViewById(R.id.txtTenSachChuaXacNhan);
-        holder.txtTheLoai = view.findViewById(R.id.txtTheLoaiChuaXacNhan);
-        holder.txtNguoiMuon = view.findViewById(R.id.txtNguoiMuonChuaXacNhan);
-        holder.txtThoiGianMuon = view.findViewById(R.id.txtThoiGianMuonCXN);
-        holder.txtThoiGianTra = view.findViewById(R.id.txtThoiGianTraCXN);
+        holder.imgSachMuon = view.findViewById(R.id.imgSachMuonCXNQL);
+        holder.txtTenSach = view.findViewById(R.id.txtTenSachCXNQL);
+        holder.txtTheLoai = view.findViewById(R.id.txtTheLoaiCXNQL);
+        holder.txtNguoiMuon = view.findViewById(R.id.txtNguoiMuonCXNQL);
+        holder.txtThoiGianMuon = view.findViewById(R.id.txtThoiGianMuonCXNQL);
+        holder.txtThoiGianTra = view.findViewById(R.id.txtThoiGianTraCXNQL);
         holder.btnDongY = view.findViewById(R.id.btnDongY);
         holder.btnHuy = view.findViewById(R.id.btnHuy);
     }
 
     private void setupDaXacNhanView(ViewHolder holder, View view) {
-        holder.imgSachMuon = view.findViewById(R.id.imgSachMuonDXN);
-        holder.txtTenSach = view.findViewById(R.id.txtTenSachDXN);
-        holder.txtTheLoai = view.findViewById(R.id.txtTheLoaiDXN);
-        holder.txtNguoiMuon = view.findViewById(R.id.txtNguoiMuonDXN);
-        holder.txtThoiGianMuon = view.findViewById(R.id.txtThoiGianMuonDXN);
-        holder.txtThoiGianTra = view.findViewById(R.id.txtThoiGianTraDXN);
+        holder.imgSachMuon = view.findViewById(R.id.imgSachMuonDXNQL);
+        holder.txtTenSach = view.findViewById(R.id.txtTenSachDXNQL);
+        holder.txtTheLoai = view.findViewById(R.id.txtTheLoaiDXNQL);
+        holder.txtNguoiMuon = view.findViewById(R.id.txtNguoiMuonDXNQL);
+        holder.txtThoiGianMuon = view.findViewById(R.id.txtThoiGianMuonDXNQL);
+        holder.txtThoiGianTra = view.findViewById(R.id.txtThoiGianTraDXNQL);
     }
 
     private void populateData(ViewHolder holder, PhieuMuon pm, int viewType) {

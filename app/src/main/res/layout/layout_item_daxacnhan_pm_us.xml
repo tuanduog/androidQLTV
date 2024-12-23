@@ -114,7 +114,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thời gian trả: "
+                android:text="Thời gian hẹn trả: "
                 android:textSize="16sp"
                 android:textColor="@color/dark_gray"
                 android:paddingBottom="10dp" />

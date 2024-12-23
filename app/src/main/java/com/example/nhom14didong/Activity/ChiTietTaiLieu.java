@@ -21,7 +21,10 @@ import com.bumptech.glide.Glide;
 import com.example.nhom14didong.R;
 
 import java.io.ByteArrayInputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class ChiTietTaiLieu extends AppCompatActivity {
 
@@ -178,9 +181,9 @@ public class ChiTietTaiLieu extends AppCompatActivity {
         try {
             String userID = getSharedPreferences("UserPref", MODE_PRIVATE).getString("USERID", null);
             String tinhTrang = "Chưa xác nhận";
-            String query = "INSERT INTO PHIEUMUON (USERID, TAILIEUID, NGAYMUON, NGAYHENTRA, TINHTRANG, GHICHU) VALUES (?, ?, ?, ?, ?)";
-            long ngayMuon = System.currentTimeMillis();
-
+            String query = "INSERT INTO PHIEUMUON (USERID, TAILIEUID, NGAYMUON, NGAYHENTRA, TINHTRANG, GHICHU) VALUES (?, ?, ?, ?, ?,?)";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String ngayMuon = sdf.format(new Date());
             database.execSQL(query, new Object[]{userID,taiLieuId, ngayMuon, ngayHenTra, tinhTrang, ghiChu});
             Toast.makeText(this, "Đã thêm vào phiếu mượn!", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {

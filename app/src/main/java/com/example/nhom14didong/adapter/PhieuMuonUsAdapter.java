@@ -162,6 +162,5 @@ public class PhieuMuonUsAdapter extends BaseAdapter {
     private static class ViewHolder {
         ImageView imgSachMuon;
         TextView txtTenSach, txtTheLoai, txtNguoiMuon, txtThoiGianMuon, txtThoiGianTra;
-        Button btnDongY, btnHuy;
     }
 }
