@@ -53,5 +53,12 @@ private ImageButton imgbtnProfile, imgbtnQLPM, imgbtnDuyetPM;
                 startActivity(intent);
             }
         });
+        imgbtnDuyetPM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Admin_Homepage.this, DsPhieuMuon.class);
+                startActivity(intent);
+            }
+        });
     }
 }
