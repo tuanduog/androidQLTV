@@ -178,7 +178,7 @@ public class ChiTietTaiLieu extends AppCompatActivity {
         try {
             String userID = getSharedPreferences("UserPref", MODE_PRIVATE).getString("USERID", null);
             String tinhTrang = "Chưa xác nhận";
-            String query = "INSERT INTO PHIEUMUON (USERID, TAILIEUID, NGAYMUON, NGAYHENTRA, TINHTRANG, GHICHU) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO PHIEUMUON (USERID, TAILIEUID, NGAYMUON, NGAYHENTRA, TINHTRANG, GHICHU) VALUES (?, ?, ?, ?, ?)";
             long ngayMuon = System.currentTimeMillis();
 
             database.execSQL(query, new Object[]{userID,taiLieuId, ngayMuon, ngayHenTra, tinhTrang, ghiChu});

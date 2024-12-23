@@ -4,29 +4,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+
     android:background="@color/white">
 
     <!-- Title -->
-    <TextView
-        android:id="@+id/tv_title"
+    <LinearLayout
+        android:paddingTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Quản lý thư viện"
-        android:textSize="27sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="20dp" />
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quản lý thư viện"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="85dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="20dp" />
+        <ImageButton
+            android:id="@+id/imgbtnProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:layout_marginStart="30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/user"/>
+    </LinearLayout>
 
     <!-- Image -->
     <ImageView
+        android:padding="16dp"
         android:id="@+id/img_library"
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:src="@drawable/tv"
-
         android:scaleType="centerCrop"
         android:layout_marginBottom="25dp" />
 
@@ -47,6 +62,7 @@
             android:gravity="center">
 
             <FrameLayout
+                android:id="@+id/flDSTaiLieu"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:background="@drawable/border"
@@ -64,8 +80,8 @@
                     android:text="Xem thống kê"
                     android:textSize="16dp"
                     android:textStyle="bold"
-                    android:layout_marginTop="55dp"
                     android:textColor="@color/black"
+                    android:layout_marginTop="55dp"
                     android:layout_marginStart="35dp"
                     android:textAlignment="center"
                     />
@@ -73,13 +89,12 @@
             </FrameLayout>
 
             <FrameLayout
-
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:background="@drawable/border"
                 >
                 <ImageButton
-                    android:id="@+id/imgbtnQLTaiLieu"
+                    android:id="@+id/imgbtnQLTL"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
                     android:src="@drawable/list"
@@ -117,6 +132,7 @@
                 android:layout_marginRight="20dp">
 
                 <ImageButton
+                    android:id="@+id/imgbtnQLND"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="7px"
@@ -126,14 +142,14 @@
                     android:src="@drawable/user" />
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Quản lý tài khoản"
+                    android:text="Quản lý người dùng"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_marginTop="55dp"
-                    android:layout_marginStart="35dp"
+                    android:layout_marginStart="25dp"
                     android:textAlignment="center"
                     />
 
@@ -153,83 +169,54 @@
                     android:background="@android:color/transparent"
                     android:layout_marginStart="40dp"/>
                 <TextView
-                    android:layout_width="90dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Quản lý phiếu mượn"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_marginTop="55dp"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="25dp"
                     android:textAlignment="center"
                     />
 
             </FrameLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <!-- Bottom Navigation -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="105dp"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/black" />
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="25dp">
 
-            <ImageButton
-                android:id="@+id/btnSearch"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="9dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/home" />
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:background="@drawable/border"
+               >
 
-            <ImageButton
-                android:id="@+id/imgbtnXemThongKe2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/book_img" />
+                <ImageButton
+                    android:id="@+id/imgbtnDuyetPM"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="7px"
+                    android:layout_marginStart="45dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/pheduyet" />
 
-            <ImageButton
-                android:id="@+id/imgbtnQLTaiLieu2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/list" />
-
-            <ImageButton
-                android:id="@+id/imgbtnQLPM2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/list2" />
-
-            <ImageButton
-                android:id="@+id/imgbtnProfile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/user" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Duyệt phiếu mượn"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginStart="28dp"
+                    android:textAlignment="center"
+                    />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
