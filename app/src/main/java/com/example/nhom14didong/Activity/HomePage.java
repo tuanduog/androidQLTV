@@ -41,7 +41,7 @@ public class HomePage extends AppCompatActivity {
             startActivity(intent);
         });
         imgbtnDSPM.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, DsPhieuMuon.class);
+            Intent intent = new Intent(HomePage.this, DanhSachPhieuMuonUS.class);
             startActivity(intent);
         });
         flDSTaiLieu.setOnClickListener(v -> {
@@ -61,7 +61,7 @@ public class HomePage extends AppCompatActivity {
             startActivity(intent);
         });
         imgbtnDSPM2.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, DsPhieuMuon.class);
+            Intent intent = new Intent(HomePage.this, DanhSachPhieuMuonUS.class);
             startActivity(intent);
         });
     }

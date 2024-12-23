@@ -6,21 +6,20 @@
     android:padding="12dp"
     android:background="@drawable/item_background"
     android:layout_margin="8dp"
-    android:elevation="4dp"
-    >
+    android:elevation="4dp">
 
-    <!-- Hình ảnh sách -->
+    <!-- Hình ảnh -->
     <ImageView
-        android:id="@+id/imgSachMuon"
+        android:id="@+id/imgSachMuonDXN"
         android:layout_width="100dp"
         android:layout_height="120dp"
         android:layout_marginEnd="12dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_placeholder_image"
         android:background="@drawable/image_background"
-        android:contentDescription="@string/book_image_description" />
+        />
 
-    <!-- Thông tin sách -->
+    <!-- Nội dung -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -28,16 +27,16 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtTenSachChuaXacNhan"
+            android:id="@+id/txtTenSachDXN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tên sách"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:paddingBottom="8dp"
             android:ellipsize="end"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:paddingBottom="8dp"
+            android:text="Tên sách"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -130,30 +129,7 @@
                 android:paddingBottom="10dp" />
         </LinearLayout>
 
-        <!-- Nút hành động -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
 
-            <Button
-                android:id="@+id/btnDongY"
-                android:layout_width="120dp"
-                android:layout_height="48dp"
-                android:text="Đồng ý"
-                android:backgroundTint="@color/green_dark"
-                android:layout_marginEnd="8dp"
-                android:elevation="1dp" />
 
-            <Button
-                android:id="@+id/btnHuy"
-                android:layout_width="120dp"
-                android:layout_height="48dp"
-                android:text="Hủy"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/dark_gray"
-                android:elevation="1dp" />
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -26,7 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:src="@drawable/tv"
-
         android:scaleType="centerCrop"
         android:layout_marginBottom="25dp" />
 
@@ -47,12 +46,13 @@
             android:gravity="center">
 
             <FrameLayout
+                android:id="@+id/flDSTaiLieu"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:background="@drawable/border"
                 android:layout_marginRight="20dp">
                 <ImageButton
-                    android:id="@+id/imgbtnXemThongKe"
+                    android:id="@+id/imgbtnDSTL"
                     android:layout_width="70dp"
                     android:layout_height="60dp"
                     android:src="@drawable/book_img"
@@ -61,11 +61,11 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Xem thống kê"
+                    android:text="Danh sách tài liệu"
                     android:textSize="16dp"
                     android:textStyle="bold"
-                    android:layout_marginTop="55dp"
                     android:textColor="@color/black"
+                    android:layout_marginTop="55dp"
                     android:layout_marginStart="35dp"
                     android:textAlignment="center"
                     />
@@ -73,13 +73,12 @@
             </FrameLayout>
 
             <FrameLayout
-
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:background="@drawable/border"
                 >
                 <ImageButton
-                    android:id="@+id/imgbtnQLTaiLieu"
+                    android:id="@+id/imgbtnDSPM"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
                     android:src="@drawable/list"
@@ -90,12 +89,12 @@
                 <TextView
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:text="Quản lý tài liệu"
+                    android:text="Danh sách phiếu mượn"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_marginTop="55dp"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="35dp"
                     android:textAlignment="center"
                     />
 
@@ -117,18 +116,19 @@
                 android:layout_marginRight="20dp">
 
                 <ImageButton
+                    android:id="@+id/imgbtnDSYT"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="7px"
                     android:layout_marginStart="40dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/user" />
+                    android:src="@drawable/like" />
 
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Quản lý tài khoản"
+                    android:text="Danh sách yêu thích"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -145,22 +145,21 @@
                 android:background="@drawable/border"
                 >
                 <ImageButton
-                    android:id="@+id/imgbtnQLPM"
+                    android:id="@+id/imgbtnTimKiem"
                     android:layout_width="70dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/list2"
-                    android:scaleType="fitCenter"
+                    android:src="@drawable/search_img"
                     android:background="@android:color/transparent"
                     android:layout_marginStart="40dp"/>
                 <TextView
-                    android:layout_width="90dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Quản lý phiếu mượn"
+                    android:text="Tìm kiếm tài liệu"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_marginTop="55dp"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="35dp"
                     android:textAlignment="center"
                     />
 
@@ -179,57 +178,53 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@android:color/black" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            >
 
             <ImageButton
                 android:id="@+id/btnSearch"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
                 android:layout_marginStart="9dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/home" />
-
-            <ImageButton
-                android:id="@+id/imgbtnXemThongKe2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/book_img" />
-
+                android:background="@android:color/transparent"
+                android:src="@drawable/home"/>
             <ImageButton
-                android:id="@+id/imgbtnQLTaiLieu2"
+                android:id="@+id/imgbtnDSTL2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:scaleType="fitCenter"
                 android:layout_marginStart="20dp"
                 android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/list" />
-
+                android:src="@drawable/book_img"/>
             <ImageButton
-                android:id="@+id/imgbtnQLPM2"
+                android:id="@+id/imgbtnTimKiem2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="20dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/search_img"/>
+            <ImageButton
+                android:id="@+id/imgbtnDSPM2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:scaleType="fitCenter"
                 android:layout_marginStart="20dp"
                 android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/list2" />
-
+                android:src="@drawable/cart"/>
             <ImageButton
                 android:id="@+id/imgbtnProfile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:scaleType="fitCenter"
                 android:layout_marginStart="20dp"
                 android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/user" />
+                android:src="@drawable/user"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
