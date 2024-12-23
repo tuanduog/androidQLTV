@@ -13,26 +13,17 @@ import com.example.nhom14didong.R;
 public class Admin_Homepage extends AppCompatActivity {
 private ImageButton imgbtnQLTaiLieu;
 private ImageButton imgbtnXemThongKe;
-private ImageButton imgbtnProfile, imgbtnXemThongKe2, imgbtnQLPM, imgbtnQLPM2, imgbtnQLTaiLieu2;
+private ImageButton imgbtnProfile, imgbtnQLPM, imgbtnDuyetPM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_homepage);
-        imgbtnQLTaiLieu = findViewById(R.id.imgbtnQLTaiLieu);
+        imgbtnQLTaiLieu = findViewById(R.id.imgbtnQLTL);
         imgbtnXemThongKe = findViewById(R.id.imgbtnXemThongKe);
+        imgbtnDuyetPM = findViewById(R.id.imgbtnDuyetPM);
         imgbtnProfile = findViewById(R.id.imgbtnProfile);
-        imgbtnQLPM2 = findViewById(R.id.imgbtnQLPM2);
-        imgbtnXemThongKe2 = findViewById(R.id.imgbtnXemThongKe2);
         imgbtnQLPM = findViewById(R.id.imgbtnQLPM);
-        imgbtnQLTaiLieu2 = findViewById(R.id.imgbtnQLTaiLieu2);
-        imgbtnQLPM2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Admin_Homepage.this, QuanLyMuonTra.class);
-                startActivity(intent);
-            }
-        });
         imgbtnQLPM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,20 +31,7 @@ private ImageButton imgbtnProfile, imgbtnXemThongKe2, imgbtnQLPM, imgbtnQLPM2, i
                 startActivity(intent);
             }
         });
-        imgbtnQLTaiLieu2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Admin_Homepage.this, QuanLyTaiLieu.class);
-                startActivity(intent);
-            }
-        });
-        imgbtnXemThongKe2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Admin_Homepage.this, XemThongKe.class);
-                startActivity(intent);
-            }
-        });
+
         imgbtnQLTaiLieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

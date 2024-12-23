@@ -112,11 +112,13 @@ public class YeuThichAdapter extends BaseAdapter {
                 bookImageView.setImageResource(R.drawable.book_img);
             }
             cardView.setOnClickListener(v -> {
-                new Handler().postDelayed(() -> {
+                if (itemId != -1) {
                     Intent intent = new Intent(context, ChiTietTaiLieu.class);
                     intent.putExtra("TAILIEUID", itemId);
                     context.startActivity(intent);
-                }, 500); // Delay 0.5 seconds
+                } else {
+                    Toast.makeText(context, "Không tìm thấy TAILIEUID", Toast.LENGTH_SHORT).show();
+                }
             });
         }
         return convertView;
