@@ -8,16 +8,22 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhom14didong.R;
+import com.example.nhom14didong.adapter.YeuThichAdapter;
 
 public class ThongKeChiTiet extends AppCompatActivity {
     private SQLiteDatabase database;
+    private ListView listView;
+    private YeuThichAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,7 @@ public class ThongKeChiTiet extends AppCompatActivity {
         TextView txtUserName = findViewById(R.id.user_name);
         TextView txtUserID = findViewById(R.id.user_id);
         txtUserID.setText(userID);
+        listView = findViewById(R.id.lv);
         txtUserName.setText(userName);
         database = openOrCreateDatabase("mydatabase.db", MODE_PRIVATE, null);
         loadDataFromDatabase();
@@ -122,6 +129,23 @@ public class ThongKeChiTiet extends AppCompatActivity {
                 // Thêm TableRow vào TableLayout
                 tbPhieuMuon.addView(tableRow);
             } while (cursor1.moveToNext());
+        }
+        TextView tvNoFavorites = findViewById(R.id.tv_no_favorites);
+        String query2 = "SELECT TAILIEU.TAILIEUID, TAILIEU.TENTAILIEU, TAILIEU.THELOAI, TAILIEU.SOLUONG, TAILIEU.TINHTRANG, TAILIEU.IMAGE " +
+                "FROM DANHSACHYEUTHICH " +
+                "INNER JOIN TAILIEU ON DANHSACHYEUTHICH.TAILIEUID = TAILIEU.TAILIEUID " +
+                "WHERE DANHSACHYEUTHICH.USERID = ?";
+        Cursor cursor2 = database.rawQuery(query2, new String[]{userID});
+
+        // Gán dữ liệu vào adapter và hiển thị
+        if(cursor2 != null && cursor2.getCount() > 0){
+            tvNoFavorites.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+            adapter = new YeuThichAdapter(this, cursor2);
+            listView.setAdapter(adapter);
+        } else {
+            tvNoFavorites.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
         }
     }
 }

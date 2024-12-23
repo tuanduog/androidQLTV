@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,14 +43,18 @@ public class TimKiem extends AppCompatActivity {
     }
 
     private void TimKiemTaiLieu(String keyword){
+        TextView tvNoFavorites = findViewById(R.id.tv_no_favorites);
         String query = "SELECT IMAGE, TENTAILIEU, THELOAI, SOLUONG, TINHTRANG FROM TAILIEU WHERE TENTAILIEU LIKE ?";
         Cursor cursor = database.rawQuery(query, new String[]{"%" + keyword + "%"});
 
         if(cursor.getCount() > 0){
+            tvNoFavorites.setVisibility(View.GONE);
+            lv.setVisibility(View.VISIBLE);
             adapter = new TaiLieuAdapter_us(this, cursor);
             lv.setAdapter(adapter);
         } else {
-            Toast.makeText(this, "Không tìm thấy tài liệu nào", Toast.LENGTH_SHORT).show();
+            tvNoFavorites.setVisibility(View.VISIBLE);
+            lv.setVisibility(View.GONE);
         }
     }
     @Override

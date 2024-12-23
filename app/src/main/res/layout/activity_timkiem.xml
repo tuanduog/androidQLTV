@@ -35,7 +35,16 @@
             android:src="@drawable/search_img"
             />
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/tv_no_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Không tìm thấy tài liệu liên quan nào!"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
     <!-- List View -->
     <ListView
         android:id="@+id/lv"
