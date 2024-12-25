@@ -16,6 +16,15 @@
             android:name=".Activity.DanhSachPhieuMuonUS"
             android:exported="true" />
         <activity
+            android:name=".Activity.EditUser"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.AddUserActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.QuanLyUser"
+            android:exported="true" />
+        <activity
             android:name=".Activity.ChiTietTaiLieu"
             android:exported="true" />
         <activity
@@ -32,9 +41,6 @@
             android:exported="true" />
         <activity
             android:name=".Activity.QuanLyMuonTra"
-            android:exported="true" />
-        <activity
-            android:name=".Activity.DsPhieuMuon"
             android:exported="true" />
         <activity
             android:name=".Activity.DangKy"

@@ -75,25 +75,38 @@
 
             <LinearLayout
                 android:layout_marginBottom="3dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="4"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Số lượng: "
+
                     android:textSize="16sp"
                     android:textColor="@android:color/black" />
                 <TextView
                     android:id="@+id/book_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="4"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     />
+                <ImageButton
+                    android:id="@+id/imgbtnLove"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/love"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
+                android:layout_marginTop="-19dp"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,11 +122,7 @@
                     android:textColor="@color/black"
                     />
             </LinearLayout>
-            <Button
-                android:id="@+id/btnThemYeuThich"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Thêm vào danh sách yêu thích"/>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
