@@ -78,4 +78,17 @@ public class User {
     public void setDataCreate(String dataCreate) {
         this.dataCreate = dataCreate;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", userName='" + userName + '\'' +
+                ", userPass='" + userPass + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", dataCreate='" + dataCreate + '\'' +
+                '}';
+    }
 }

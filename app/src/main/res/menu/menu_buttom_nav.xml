@@ -8,10 +8,7 @@
         android:title="@string/action_thongke"
         android:icon="@drawable/thongkeicon"
         />
-    <item android:id="@+id/activity_QuanLyTaiKieu"
-        android:title="@string/action_tailieu"
-        android:icon="@drawable/booklisticon"
-        />
+
     <item android:id="@+id/activity_QuanLyPhieuMuonTra"
         android:title="@string/action_muontra"
         android:icon="@drawable/muontraicon"

@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.nhom14didong.Activity.DsPhieuMuon;
+import com.example.nhom14didong.Activity.DanhSachPhieuMuonUS;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
 
@@ -174,8 +174,8 @@ public class PhieuMuonAdapter extends BaseAdapter {
                     Toast.makeText(context, "Phiếu mượn đã được " + action.toLowerCase(), Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
 
-                    if (context instanceof DsPhieuMuon) {
-                        ((DsPhieuMuon) context).readData(tinhTrang);
+                    if (context instanceof DanhSachPhieuMuonUS) {
+                        ((DanhSachPhieuMuonUS) context).readData(tinhTrang);
                     }
                 })
                 .setNegativeButton("Không", null)

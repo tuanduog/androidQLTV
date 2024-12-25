@@ -13,7 +13,7 @@ import com.example.nhom14didong.R;
 public class Admin_Homepage extends AppCompatActivity {
 private ImageButton imgbtnQLTaiLieu;
 private ImageButton imgbtnXemThongKe;
-private ImageButton imgbtnProfile, imgbtnQLPM, imgbtnDuyetPM;
+private ImageButton imgbtnProfile, imgbtnQLPM, imgbtnDuyetPM, imgbtnQLND;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +24,19 @@ private ImageButton imgbtnProfile, imgbtnQLPM, imgbtnDuyetPM;
         imgbtnDuyetPM = findViewById(R.id.imgbtnDuyetPM);
         imgbtnProfile = findViewById(R.id.imgbtnProfile);
         imgbtnQLPM = findViewById(R.id.imgbtnQLPM);
+        imgbtnQLND = findViewById(R.id.imgbtnQLND);
         imgbtnQLPM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Admin_Homepage.this, QuanLyMuonTra.class);
                 startActivity(intent);
+            }
+        });
+        imgbtnQLND.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Admin_Homepage.this, QuanLyUser.class);
+                startActivity((intent));
             }
         });
 
@@ -56,9 +64,10 @@ private ImageButton imgbtnProfile, imgbtnQLPM, imgbtnDuyetPM;
         imgbtnDuyetPM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Admin_Homepage.this, DsPhieuMuon.class);
+                Intent intent = new Intent(Admin_Homepage.this, DanhSachPhieuMuonUS.class);
                 startActivity(intent);
             }
         });
+
     }
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,16 +99,28 @@ public class TaiLieuAdapter_us extends BaseAdapter {
             TextView bookStatusView = convertView.findViewById(R.id.book_status);
             bookStatusView.setText(status);
 
-            Button btnThemYT = convertView.findViewById(R.id.btnThemYeuThich);
+            ImageButton btnThemYT = convertView.findViewById(R.id.imgbtnLove);
+
+            // check
+            String userId = context.getSharedPreferences("UserPref", Context.MODE_PRIVATE).getString("USERID", null);
+            SQLiteDatabase database = context.openOrCreateDatabase("mydatabase.db", Context.MODE_PRIVATE, null);
+
+            // check tài liệu xem đã ở trong yt hay chưa
+            String checkQuery = "SELECT COUNT(*) FROM DANHSACHYEUTHICH WHERE USERID = ? AND TAILIEUID = ?";
+            Cursor checkCursor = database.rawQuery(checkQuery, new String[]{String.valueOf(userId), String.valueOf(itemId)});
+            if (checkCursor.moveToFirst() && checkCursor.getInt(0) > 0) {
+                // nếu ở r thì set red
+                btnThemYT.setImageResource(R.drawable.love_red);
+            } else {
+                // nếu chưa set ko màu
+                btnThemYT.setImageResource(R.drawable.love);
+            }
+
             btnThemYT.setOnClickListener(v -> {
-                String userId = context.getSharedPreferences("UserPref", Context.MODE_PRIVATE).getString("USERID", null);
-                String ngayThem = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-                SQLiteDatabase database = context.openOrCreateDatabase("mydatabase.db", Context.MODE_PRIVATE, null);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                String ngayThem = sdf.format(new Date());
 
                 try {
-                    // Kiểm tra xem tài liệu đã có trong danh sách yêu thích chưa
-                    String checkQuery = "SELECT COUNT(*) FROM DANHSACHYEUTHICH WHERE USERID = ? AND TAILIEUID = ?";
-                    Cursor checkCursor = database.rawQuery(checkQuery, new String[]{String.valueOf(userId), String.valueOf(itemId)});
                     if (checkCursor.moveToFirst() && checkCursor.getInt(0) > 0) {
                         Toast.makeText(context, bookName + " đã có trong danh sách yêu thích!", Toast.LENGTH_SHORT).show();
                     } else {
@@ -115,7 +128,8 @@ public class TaiLieuAdapter_us extends BaseAdapter {
                         database.execSQL(insertQuery, new Object[]{userId, itemId, ngayThem});
                         Toast.makeText(context, "Đã thêm " + bookName + " vào yêu thích!", Toast.LENGTH_SHORT).show();
 
-                        // Cập nhật danh sách yêu thích sau khi thêm
+                        btnThemYT.setImageResource(R.drawable.love_red);
+
                         if (context instanceof TaiLieuYeuThich) {
                             ((TaiLieuYeuThich) context).loadDataFromDatabase();
                         }
@@ -128,6 +142,8 @@ public class TaiLieuAdapter_us extends BaseAdapter {
                     database.close();
                 }
             });
+
+
             CardView cardView = convertView.findViewById(R.id.cart_view);
             // ImageView setup: Load image from path (Glide)
             ImageView bookImageView = convertView.findViewById(R.id.book_image);
