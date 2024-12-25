@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/activity_home"
+        android:title="@string/action_home"
+        android:icon="@drawable/homeicon"
+        />
+    <item android:id="@+id/activity_Xemthongke"
+        android:title="@string/action_thongke"
+        android:icon="@drawable/thongkeicon"
+        />
+    <item android:id="@+id/activity_QuanLyTaiKieu"
+        android:title="@string/action_tailieu"
+        android:icon="@drawable/booklisticon"
+        />
+    <item android:id="@+id/activity_QuanLyPhieuMuonTra"
+        android:title="@string/action_muontra"
+        android:icon="@drawable/muontraicon"
+        />
+    <item android:id="@+id/activity_xemTTUser"
+        android:title="@string/action_user"
+        android:icon="@drawable/usermanager"
+        />
+</menu>

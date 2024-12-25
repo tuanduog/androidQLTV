@@ -1,7 +1,9 @@
 package com.example.nhom14didong.Activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,9 +27,9 @@ import java.io.OutputStream;
 public class DangKy extends AppCompatActivity {
     String DB_PATH_SUFFIX = "/databases/";
     SQLiteDatabase database=null;
-    String DATABASE_NAME="QLThuVien1.db";
-    private EditText edtUsername, edtPassword;
-    private Button btnDangKy;
+    String DATABASE_NAME="mydatabase.db";
+    private EditText edtUsername, edtPassword1, edtEmail, edtPassword2, edtHotenDK;
+    private Button btnDangKy, btnQuaylai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,26 +38,41 @@ public class DangKy extends AppCompatActivity {
         processCopy();
         database = SQLiteDatabase.openDatabase(getDatabasePath(), null, SQLiteDatabase.OPEN_READWRITE);
         edtUsername = findViewById(R.id.edtTaiKhoanDK);
-        edtPassword = findViewById(R.id.edtMatKhauDK1);
+        edtPassword1 = findViewById(R.id.edtMatKhauDK1);
+        edtEmail = findViewById(R.id.edtEmailDK);
+        edtPassword2 = findViewById(R.id.edtMatKhau2);
+        edtHotenDK = findViewById(R.id.edtHoTenDk);
         btnDangKy = findViewById(R.id.btnTaoTaiKhoan);
+        btnQuaylai = findViewById(R.id.btnQuayLai);
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DangKyTaiKhoan();
             }
         });
-
+        btnQuaylai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DangKy.this, Start.class);
+                startActivity(intent);
+            }
+        });
     }
     private void DangKyTaiKhoan() {
         String username = edtUsername.getText().toString().trim();
-        String password = edtPassword.getText().toString().trim();
-
+        String password1 = edtPassword1.getText().toString().trim();
+        String password2 = edtPassword2.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
+        String hoten = edtHotenDK.getText().toString().trim();
         // Kiểm tra rỗng
-        if (username.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() || password1.isEmpty() || email.isEmpty() || hoten.isEmpty() || password2.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Email không hợp lệ!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         // Kiểm tra tài khoản đã tồn tại
         Cursor cursor = database.rawQuery("SELECT * FROM NGUOIDUNG WHERE USERNAME = ?", new String[]{username});
         if (cursor.getCount() > 0) {
@@ -63,17 +80,31 @@ public class DangKy extends AppCompatActivity {
             cursor.close();
             return;
         }
+
+        if(password1.length() < 6){
+            Toast.makeText(this, "Mật khẩu phải chứa ít nhất 6 kí tự!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!password1.equals(password2)){
+            Toast.makeText(this, "Mật khẩu xác nhận không đúng!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         cursor.close();
 
         // Thêm tài khoản vào cơ sở dữ liệu
         try {
-            String query = "INSERT INTO NguoiDung (UserName,UserPass) VALUES ('" + username + "', '" + password + "')";
+            String query = "INSERT INTO NGUOIDUNG (USERNAME, USERPASS, FULLNAME, EMAIL, ROLE) VALUES ('" + username + "', '" + password1 + "', '" + hoten + "', '" + email + "', 'user')";
             database.execSQL(query);
             Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
 
             // Xóa nội dung nhập sau khi đăng ký thành công
             edtUsername.setText("");
-            edtPassword.setText("");
+            edtPassword1.setText("");
+            edtHotenDK.setText("");
+            edtPassword2.setText("");
+            edtEmail.setText("");
+            Intent intent = new Intent(DangKy.this, DangNhap.class);
+            startActivity(intent);
 
         } catch (Exception e) {
             e.printStackTrace();

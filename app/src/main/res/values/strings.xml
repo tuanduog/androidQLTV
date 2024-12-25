@@ -1,3 +1,14 @@
 <resources>
+    <!-- App Name -->
     <string name="app_name">Nhom14DiDong</string>
+
+    <!-- Descriptions -->
+    <string name="book_image_description">Placeholder image for book</string>
+
+    <!-- Actions -->
+    <string name="action_home">Home</string>
+    <string name="action_thongke">Thống kê</string>
+    <string name="action_tailieu">Tài liệu</string>
+    <string name="action_muontra">Mượn trả</string>
+    <string name="action_user">User</string>
 </resources>
