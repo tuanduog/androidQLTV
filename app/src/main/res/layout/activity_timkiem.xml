@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Search Bar Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/border_edt"
+        android:gravity="center_vertical">
+
+        <!-- Search Input -->
+        <EditText
+            android:id="@+id/edtTimKiem"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:hint="Bạn muốn tìm kiếm ..."
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:background="@drawable/border_notright"
+             />
+
+        <!-- Search Button -->
+        <ImageButton
+            android:id="@+id/btnTimKiem"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="-2dp"
+            android:background="@drawable/imagebtn"
+            android:src="@drawable/search_img"
+            />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_no_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Không tìm thấy tài liệu liên quan nào!"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+    <!-- List View -->
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
+</LinearLayout>

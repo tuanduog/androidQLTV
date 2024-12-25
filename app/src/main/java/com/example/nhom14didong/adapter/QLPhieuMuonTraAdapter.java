@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nhom14didong.Activity.DsPhieuMuon;
+import com.example.nhom14didong.Activity.QuanLyMuonTra;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
 
@@ -94,7 +96,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                 // Layout cho "Phieu muon"
                 convertView = inflater.inflate(R.layout.layout_item_ql_phieumuon, parent, false);
                 // Anh xa
-                TextView txtPhieuMuonID = (TextView) convertView.findViewById(R.id.txtIDPM);
+
                 TextView txtTenSach = (TextView) convertView.findViewById(R.id.txtTenSachPM);
                 TextView txtNguoiMuon = (TextView) convertView.findViewById(R.id.txtNguoiMuonPM);
                 TextView txtNgayMuon= (TextView) convertView.findViewById(R.id.txtNgayMuonPM);
@@ -114,13 +116,12 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                     String tenNguoiMuon = cursor.getString(2);
                     String ngayMuon = cursor.getString(3);
                     String ngayHenTra = cursor.getString(4);
-                    txtPhieuMuonID.setText(phieuMuonID);
                     txtTenSach.setText(tenSach);
                     txtNguoiMuon.setText(tenNguoiMuon);
                     txtNgayMuon.setText(ngayMuon);
                     txtNgayHenTra.setText(ngayHenTra);
                 }
-                //NUT XOA
+                //NUT XOA done
                 btnXoa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -129,17 +130,22 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         String updateQuery = "UPDATE PHIEUMUON SET TINHTRANG = 'Đã xóa' WHERE PHIEUMUONID = ?";
                                         database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
                                         Toast.makeText(context, "Phiếu mượn đã bị xóa", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
+                                        if (context instanceof QuanLyMuonTra) {
+                                            String tinhTrang="Đã xác nhận";
+                                            ((QuanLyMuonTra) context).readData(tinhTrang);
+                                        }
                                     }
                                 })
                                 .setNegativeButton("Không", null);
                         builder.create().show();
                     }
                 });
-                //NUT XAC NHAN TRA
+                //NUT XAC NHAN TRA done
                 btnXacNhanTra.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -148,17 +154,22 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         String updateQuery = "UPDATE PHIEUMUON SET NGAYTRA = CURRENT_TIMESTAMP WHERE PHIEUMUONID = ?";
                                         database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
                                         Toast.makeText(context, "Xác nhận trả thành công", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
+                                        if (context instanceof QuanLyMuonTra) {
+                                            String tinhTrang="Đã xác nhận";
+                                            ((QuanLyMuonTra) context).readData(tinhTrang);
+                                        }
                                     }
                                 })
                                 .setNegativeButton("Không", null);
                         builder.create().show();
                     }
                 });
-                //NUT SUA
+                //NUT SUA done
                 btnSua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -188,17 +199,22 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         // Lấy dữ liệu người dùng sửa
+
                                         String ngayMuonMoi = edtNgayMuon.getText().toString();
                                         String ngayHenTraMoi = edtNgayHenTra.getText().toString();
 
                                         // Cập nhật cơ sở dữ liệu
-                                        String updateQuery = "UPDATE PHIEUMUON SET , NGAYMUON = ?, NGAYHENTRA = ? WHERE PHIEUMUONID = ?";
+                                        String updateQuery = "UPDATE PHIEUMUON SET NGAYMUON = ?, NGAYHENTRA = ? WHERE PHIEUMUONID = ?";
                                         database.execSQL(updateQuery, new Object[]{ ngayMuonMoi, ngayHenTraMoi, pm.phieuMuonID});
                                         txtNgayMuon.setText(ngayMuonMoi);
                                         txtNgayHenTra.setText(ngayHenTraMoi);
-
                                         Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
+                                        if (context instanceof QuanLyMuonTra) {
+                                            String tinhTrang="Đã xác nhận";
+                                            ((QuanLyMuonTra) context).readData(tinhTrang);
+                                        }
+
                                     }
                                 })
                                 .setNegativeButton("Hủy", null);
@@ -214,7 +230,7 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                 // Layout cho "Phieu tra "
                 convertView = inflater.inflate(R.layout.layout_item_ql_phieutra ,parent, false);
                 //anh xa
-                TextView txtPhieuMuonID = (TextView) convertView.findViewById(R.id.txtIDPT);
+
                 TextView txtTenSach = (TextView) convertView.findViewById(R.id.txtTenSachPT);
                 TextView txtNguoiMuon = (TextView) convertView.findViewById(R.id.txtNguoiMuonPT);
                 TextView txtNgayMuon= (TextView) convertView.findViewById(R.id.txtNgayMuonPT);
@@ -226,13 +242,12 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                 " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA , PHIEUMUON.NGAYTRA FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
                                 "INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID WHERE PHIEUMUON.PHIEUMUONID = ? ",new String[]{String.valueOf(pm.phieuMuonID)});
                 if (cursor.moveToFirst()) {
-                    String phieuMuonID = cursor.getString(0);
+//                    String phieuMuonID = cursor.getString(0);
                     String tenSach = cursor.getString(1);
                     String tenNguoiMuon = cursor.getString(2);
                     String ngayMuon = cursor.getString(3);
                     String ngayHenTra = cursor.getString(4);
                     String ngayTra = cursor.getString(5);
-                    txtPhieuMuonID.setText(phieuMuonID);
                     txtTenSach.setText(tenSach);
                     txtNguoiMuon.setText(tenNguoiMuon);
                     txtNgayMuon.setText(ngayMuon);
@@ -251,6 +266,10 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                                         database.execSQL(updateQuery, new Object[]{pm.phieuMuonID});
                                         Toast.makeText(context, "Phiếu mượn đã bị xóa", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
+                                        if (context instanceof QuanLyMuonTra) {
+                                            String tinhTrang="Đã xác nhận";
+                                            ((QuanLyMuonTra) context).readData(tinhTrang);
+                                        }
                                     }
                                 })
                                 .setNegativeButton("Không", null);
