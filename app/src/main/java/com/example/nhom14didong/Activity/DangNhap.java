@@ -80,7 +80,7 @@ public class DangNhap extends AppCompatActivity {
                 edtMatKhau.setText("");
                 cursor.close();
                  // Chuyển sang màn hình HomeActivity
-                if(role.equalsIgnoreCase("user")){
+                if(role.equalsIgnoreCase("USER")){
                     Intent intent = new Intent(DangNhap.this, HomePage.class);
                     startActivity(intent);
                 } else {

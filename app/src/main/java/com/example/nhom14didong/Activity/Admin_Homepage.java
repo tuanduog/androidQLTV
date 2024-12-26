@@ -64,7 +64,7 @@ private ImageButton imgbtnProfile, imgbtnQLPM, imgbtnDuyetPM, imgbtnQLND;
         imgbtnDuyetPM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Admin_Homepage.this, DanhSachPhieuMuonUS.class);
+                Intent intent = new Intent(Admin_Homepage.this, DsPhieuMuon.class);
                 startActivity(intent);
             }
         });

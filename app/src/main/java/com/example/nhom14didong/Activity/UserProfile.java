@@ -62,9 +62,9 @@ public class UserProfile extends AppCompatActivity {
                 txtuserName.setText(userName);
                 txtEmail.setText(userEmail);
                 txtHoten.setText(hoTen);
-                if(role.equals("user")){
+                if(role.equals("USER")){
                     txtTitle.setText("Thông tin người dùng");
-                } else if(role.equals("admin")){
+                } else if(role.equals("ADMIN")){
                     txtTitle.setText("Thông tin admin");
                 }
                 cursor.close();
