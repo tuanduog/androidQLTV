@@ -1,6 +1,5 @@
 package com.example.nhom14didong.Activity;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,17 +12,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nhom14didong.Database.Database;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
-import com.example.nhom14didong.adapter.PhieuMuonUsAdapter;
+import com.example.nhom14didong.adapter.PhieuMuonAdapter;
 import com.example.nhom14didong.adapter.TaiLieuAdapter_us;
 
 import java.util.ArrayList;
 
-public class DanhSachPhieuMuonUS extends AppCompatActivity {
+public class DsPhieuMuon extends AppCompatActivity {
     final String DATABASE_NAME = "mydatabase.db";
     SQLiteDatabase database;
     ListView listView;
     ArrayList<PhieuMuon> list;
-    PhieuMuonUsAdapter adapter;
+    PhieuMuonAdapter adapter;
     Button btnChuaXacNhanPM;
     Button btnDaXacNhanPM;
     private String tinhTrang;
@@ -31,13 +30,13 @@ public class DanhSachPhieuMuonUS extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danh_sach_phieu_muon_us);
+        setContentView(R.layout.activity_dsphieumuon);
 
         list = new ArrayList<>();
         database = Database.initDatabase(this, DATABASE_NAME);
 
         anhXa();
-        adapter = new PhieuMuonUsAdapter(this, list, database, tinhTrang);
+        adapter = new PhieuMuonAdapter(this, list, database, tinhTrang);
         listView.setAdapter(adapter);
 
         // Mặc định trạng thái "Chưa xác nhận"
@@ -51,7 +50,6 @@ public class DanhSachPhieuMuonUS extends AppCompatActivity {
             updateData();
         });
 
-
         btnDaXacNhanPM.setOnClickListener(v -> {
             tinhTrang = "Đã xác nhận";
             setupButtonStyles(btnDaXacNhanPM, btnChuaXacNhanPM);
@@ -63,11 +61,11 @@ public class DanhSachPhieuMuonUS extends AppCompatActivity {
         adapter.setTinhTrang(tinhTrang);
         readData(tinhTrang);
     }
+
     public void readData(String tinhTrang) {
-        String userId =getSharedPreferences("UserPref", Context.MODE_PRIVATE).getString("USERID", null);
         Cursor cursor = database.rawQuery(
                 "SELECT PHIEUMUONID, USERID, TAILIEUID, NGAYMUON, NGAYHENTRA, NGAYTRA, TINHTRANG, GHICHU, NGAYTAO " +
-                        "FROM PHIEUMUON WHERE TINHTRANG = ? AND USERID = ?", new String[]{tinhTrang, userId});
+                        "FROM PHIEUMUON WHERE TINHTRANG = ?", new String[]{tinhTrang});
         list.clear();
 
         while (cursor.moveToNext()) {
@@ -100,8 +98,8 @@ public class DanhSachPhieuMuonUS extends AppCompatActivity {
     }
 
     private void anhXa() {
-        listView = findViewById(R.id.lvDSPMUS);
-        btnDaXacNhanPM = findViewById(R.id.btnDaXacNhanPMUS);
-        btnChuaXacNhanPM = findViewById(R.id.btnChuaXacNhanPMUS);
+        listView = findViewById(R.id.lvDSPM);
+        btnDaXacNhanPM = findViewById(R.id.btnDaXacNhanPM);
+        btnChuaXacNhanPM = findViewById(R.id.btnChuaXacNhanPM);
     }
 }

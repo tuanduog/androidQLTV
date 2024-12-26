@@ -33,6 +33,7 @@ public class ChiTietTaiLieu extends AppCompatActivity {
     private ImageView image;
 
     private SQLiteDatabase database;
+
     private long taiLieuId;
 
     @Override

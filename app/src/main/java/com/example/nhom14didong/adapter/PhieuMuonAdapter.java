@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.nhom14didong.Activity.DanhSachPhieuMuonUS;
+import com.example.nhom14didong.Activity.DsPhieuMuon;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
 
@@ -161,7 +162,7 @@ public class PhieuMuonAdapter extends BaseAdapter {
     }
 
     private void setupButtonListeners(ViewHolder holder, PhieuMuon pm) {
-        holder.btnDongY.setOnClickListener(v -> showConfirmationDialog("Xác nhận", pm.phieuMuonID, "Đã xác nhận"));
+        holder.btnDongY.setOnClickListener(v -> showConfirmationDialog("Đã xác nhận", pm.phieuMuonID, "Đã xác nhận"));
         holder.btnHuy.setOnClickListener(v -> showConfirmationDialog("Hủy", pm.phieuMuonID, "Hủy"));
     }
 
@@ -173,9 +174,8 @@ public class PhieuMuonAdapter extends BaseAdapter {
                     database.execSQL(updateQuery, new Object[]{newStatus, phieuMuonID});
                     Toast.makeText(context, "Phiếu mượn đã được " + action.toLowerCase(), Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
-
-                    if (context instanceof DanhSachPhieuMuonUS) {
-                        ((DanhSachPhieuMuonUS) context).readData(tinhTrang);
+                    if (context instanceof DsPhieuMuon) {
+                        ((DsPhieuMuon) context).readData(tinhTrang);
                     }
                 })
                 .setNegativeButton("Không", null)

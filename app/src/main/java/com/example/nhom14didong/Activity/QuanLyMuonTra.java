@@ -18,6 +18,7 @@ import com.example.nhom14didong.R;
 import com.example.nhom14didong.adapter.QLPhieuMuonTraAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuanLyMuonTra extends AppCompatActivity {
     final String DATABASE_NAME = "mydatabase.db";
@@ -36,11 +37,9 @@ public class QuanLyMuonTra extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly_muon_tra);
-
         list = new ArrayList<>();
         database = Database.initDatabase(this, DATABASE_NAME);
         adapter = new QLPhieuMuonTraAdapter(this, list, database, ngayTra);
-
         anhXa();
         listView.setAdapter(adapter);
 
@@ -80,7 +79,6 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 btnPhieuMuon.setTextColor(getResources().getColor(R.color.black));
             }
         });
-
         timKiem();
     }
 
@@ -117,7 +115,7 @@ public class QuanLyMuonTra extends AppCompatActivity {
                 "NGAYHENTRA, NGAYTRA, TINHTRANG, " +
                 "GHICHU, NGAYTAO FROM PHIEUMUON " +
                 "WHERE TINHTRANG=? ";
-        if (ngayTra == null) {
+        if (ngayTra == null || ngayTra.isEmpty()) {
             query += " AND NGAYTRA IS NULL";
         } else {
             query += " AND NGAYTRA IS NOT NULL";
@@ -125,26 +123,24 @@ public class QuanLyMuonTra extends AppCompatActivity {
 
         Cursor cursor = database.rawQuery(query, new String[]{tinhTrang});
         list.clear();
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                int phieuMuonID = cursor.getInt(0);
-                int userID = cursor.getInt(1);
-                int taiLieuID = cursor.getInt(2);
-                String ngayMuon = cursor.getString(3);
-                String ngayHenTra = cursor.getString(4);
-                String ngayTraReal = cursor.getString(5);
-                String tinhTrangPM = cursor.getString(6);
-                String ghiChu = cursor.getString(7);
-                String ngayTao = cursor.getString(8);
-                list.add(new PhieuMuon(phieuMuonID, userID, taiLieuID, ngayMuon, ngayHenTra, ngayTraReal, tinhTrangPM, ghiChu, ngayTao));
-            }
-            adapter.notifyDataSetChanged();
-            listView.setAdapter(adapter);
-            cursor.close();
+        while(cursor.moveToNext()){
+            int phieuMuonID = cursor.getInt(0);
+            int userID = cursor.getInt(1);
+            int taiLieuID = cursor.getInt(2);
+            String ngayMuon = cursor.getString(3);
+            String ngayHenTra = cursor.getString(4);
+            String ngayTraReal = cursor.getString(5);
+            String tinhTrangPM = cursor.getString(6);
+            String ghiChu = cursor.getString(7);
+            String ngayTao = cursor.getString(8);
+            list.add(new PhieuMuon(phieuMuonID, userID, taiLieuID, ngayMuon, ngayHenTra, ngayTraReal, tinhTrangPM, ghiChu, ngayTao));
         }
+        adapter.notifyDataSetChanged();
+        listView.setAdapter(adapter);
         if (list.isEmpty()) {
             Toast.makeText(this, "Danh sách trống", Toast.LENGTH_SHORT).show();
         }
+        cursor.close();
     }
 
     // Phương thức khởi tạo các view
@@ -176,6 +172,7 @@ public class QuanLyMuonTra extends AppCompatActivity {
         } else {
             query += " AND NGAYTRA IS NULL";
         }
+
 
         try (Cursor cursor = database.rawQuery(query, new String[]{tinhTrang, searchKeyword, searchKeyword, searchKeyword, searchKeyword})) {
             while (cursor.moveToNext()) {

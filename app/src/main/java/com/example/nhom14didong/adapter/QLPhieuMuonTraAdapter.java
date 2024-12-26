@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.nhom14didong.Activity.DanhSachPhieuMuonUS;
+import com.bumptech.glide.Glide;
 import com.example.nhom14didong.Activity.QuanLyMuonTra;
 import com.example.nhom14didong.Model.PhieuMuon;
 import com.example.nhom14didong.R;
@@ -103,11 +103,12 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                 TextView txtNgayHenTra = (TextView) convertView.findViewById(R.id.txtNgayHenTraPM);
                 Button btnSua = (Button) convertView.findViewById(R.id.btnSuaPM);
                 Button btnXoa = (Button) convertView.findViewById(R.id.btnXoaPM);
+                ImageView bookImageView   = (ImageView) convertView.findViewById(R.id.imgSachMuonPM);
                 Button btnXacNhanTra = (Button) convertView.findViewById(R.id.btnXacNhanTra);
                 //Truy van phieu muon
                 Cursor cursor= database.rawQuery(
                         "SELECT PHIEUMUON.PHIEUMUONID, TAILIEU.TENTAILIEU, NGUOIDUNG.FULLNAME, " +
-                                " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA  FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
+                                " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA , TAILIEU.IMAGE FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
                                 "INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID WHERE PHIEUMUON.PHIEUMUONID = ? ",new String[]{String.valueOf(pm.phieuMuonID)});
 
                 if (cursor.moveToFirst()) {
@@ -116,6 +117,21 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                     String tenNguoiMuon = cursor.getString(2);
                     String ngayMuon = cursor.getString(3);
                     String ngayHenTra = cursor.getString(4);
+                    String imagePath =cursor.getString(5);
+                    if (imagePath != null && !imagePath.isEmpty()) {
+                        int resId = context.getResources().getIdentifier(imagePath, "drawable", context.getPackageName());
+                        if (resId != 0) {
+                            Glide.with(context)
+                                    .load(resId) // Load resource by ID
+                                    .placeholder(R.drawable.book_img)
+                                    .error(R.drawable.book_img)
+                                    .into(bookImageView);
+                        } else {
+                            bookImageView.setImageResource(R.drawable.book_img); // Fallback image
+                        }
+                    } else {
+                        bookImageView.setImageResource(R.drawable.book_img);
+                    }
                     txtTenSach.setText(tenSach);
                     txtNguoiMuon.setText(tenNguoiMuon);
                     txtNgayMuon.setText(ngayMuon);
@@ -236,10 +252,11 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                 TextView txtNgayMuon= (TextView) convertView.findViewById(R.id.txtNgayMuonPT);
                 TextView txtNgayHenTra = (TextView) convertView.findViewById(R.id.txtNgayHenTraPT);
                 TextView txtNgayTra = (TextView) convertView.findViewById(R.id.txtNgayTraPT);
+                ImageView bookImageView   = (ImageView) convertView.findViewById(R.id.imgSachMuonPT);
                 Button btnXoa = (Button) convertView.findViewById(R.id.btnXoaPT);
                 Cursor cursor= database.rawQuery(
                         "SELECT PHIEUMUON.PHIEUMUONID, TAILIEU.TENTAILIEU, NGUOIDUNG.FULLNAME, " +
-                                " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA , PHIEUMUON.NGAYTRA FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
+                                " PHIEUMUON.NGAYMUON, PHIEUMUON.NGAYHENTRA , PHIEUMUON.NGAYTRA, TAILIEU.IMAGE FROM PHIEUMUON INNER JOIN TAILIEU ON PHIEUMUON.TAILIEUID=TAILIEU.TAILIEUID " +
                                 "INNER JOIN NGUOIDUNG ON PHIEUMUON.USERID=NGUOIDUNG.USERID WHERE PHIEUMUON.PHIEUMUONID = ? ",new String[]{String.valueOf(pm.phieuMuonID)});
                 if (cursor.moveToFirst()) {
 //                    String phieuMuonID = cursor.getString(0);
@@ -248,6 +265,21 @@ public class QLPhieuMuonTraAdapter extends BaseAdapter {
                     String ngayMuon = cursor.getString(3);
                     String ngayHenTra = cursor.getString(4);
                     String ngayTra = cursor.getString(5);
+                    String imagePath = cursor.getString(6);
+                    if (imagePath != null && !imagePath.isEmpty()) {
+                        int resId = context.getResources().getIdentifier(imagePath, "drawable", context.getPackageName());
+                        if (resId != 0) {
+                            Glide.with(context)
+                                    .load(resId) // Load resource by ID
+                                    .placeholder(R.drawable.book_img)
+                                    .error(R.drawable.book_img)
+                                    .into(bookImageView);
+                        } else {
+                            bookImageView.setImageResource(R.drawable.book_img); // Fallback image
+                        }
+                    } else {
+                        bookImageView.setImageResource(R.drawable.book_img);
+                    }
                     txtTenSach.setText(tenSach);
                     txtNguoiMuon.setText(tenNguoiMuon);
                     txtNgayMuon.setText(ngayMuon);
