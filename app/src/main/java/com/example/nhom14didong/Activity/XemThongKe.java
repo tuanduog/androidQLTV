@@ -32,7 +32,7 @@ public class XemThongKe extends AppCompatActivity {
 
     private void loadDataFromDatabase() {
         String query = "SELECT USERID, USERNAME FROM NGUOIDUNG WHERE ROLE = ?";
-        Cursor cursor = database.rawQuery(query, new String[]{"user"});
+        Cursor cursor = database.rawQuery(query, new String[]{"USER"});
         int recordCount = cursor.getCount();
         soLuongTK.setText("" + recordCount);
 
